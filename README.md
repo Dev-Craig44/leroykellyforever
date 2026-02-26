@@ -14,3 +14,35 @@ The React Compiler is not enabled on this template because of its impact on dev 
 ## Expanding the ESLint configuration
 
 If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+## 📨 Email Infrastructure Setup (Production-Ready Foundation)
+
+To ensure professional outreach and reliable email deliverability, I implemented custom domain email infrastructure for LeroyKellyForever.com.
+
+### Domain & Email Setup
+
+- Purchased `leroykellyforever.com`
+- Configured Google Workspace (Business Starter)
+- Created branded sender address:
+  - `info@leroykellyforever.com`
+
+### Deliverability & Authentication
+
+- Verified domain ownership in Mailchimp
+- Implemented DKIM authentication
+- Configured DNS records via Google-managed domain
+- Tested inbox placement between external accounts
+
+### Why This Matters
+
+This setup prevents:
+
+- “via mailchimp.com” warnings
+- Spam classification from shared Gmail senders
+- Brand credibility loss during outreach
+
+It establishes:
+
+- Verified sender identity
+- Improved deliverability score
+- Scalable infrastructure for future campaigns
