@@ -1,24 +1,16 @@
-import { Link } from "react-router-dom";
+import EmailCaptureSection from "../../sections/EmailCaptureSection";
 import FooterSection from "../../sections/Footer";
+import HatVideoCardSection from "../../sections/HatVideoCardSection";
 import HeroSection from "../../sections/HeroSection";
 import LegacyStatsSection from "../../sections/LegacyStatsSection";
 
-export default function Home() {
+export default function Drop() {
   return (
     <main className="bg-white text-zinc-900">
       <HeroSection />
-
       <LegacyStatsSection />
-
-      <div className="px-6 py-16 text-center">
-        <Link
-          to="/drop"
-          className="inline-block rounded-2xl bg-black px-6 py-4 text-sm font-semibold text-white"
-        >
-          View Edition I
-        </Link>
-      </div>
-
+      <HatVideoCardSection />
+      <EmailCaptureSection />
       <FooterSection />
     </main>
   );
