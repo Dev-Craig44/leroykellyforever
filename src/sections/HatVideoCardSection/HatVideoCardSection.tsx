@@ -23,22 +23,23 @@ export default function HatVideoCardSection() {
               </p>
             </div>
 
+            <p className="mt-2 text-sm font-medium text-zinc-500 tracking-wide">
+              50 Available • Edition I
+            </p>
+
             <p className="mt-2 text-sm text-zinc-600">
               Product video + photos coming next. This card will show the
               rotating hat clip.
             </p>
 
-            <button
-              type="button"
-              onClick={() => {
-                document
-                  .getElementById("email-capture")
-                  ?.scrollIntoView({ behavior: "smooth" });
-              }}
-              className="mt-5 w-full rounded-xl bg-zinc-900 px-4 py-3 text-sm font-semibold text-white"
+            <a
+              href="https://3u8jjdepw0t4gs3x-98493432090.shopifypreview.com/products_preview?preview_key=84f50be696c1fcf0381930d8df911f7f"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full sm:w-auto px-6 py-3 rounded-xl bg-black text-white font-semibold hover:bg-zinc-800 inline-block text-center"
             >
-              Request First Access
-            </button>
+              Buy Now
+            </a>
 
             <p className="mt-3 text-xs text-zinc-500 text-center">
               Brooklyn… Leroy’s granddaughter… is helping lead this legacy drop.
