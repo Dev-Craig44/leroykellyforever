@@ -5,10 +5,10 @@ const BOT_FIELD_NAME = "b_4ba46dacadaa6aa938673b23d_4c9d7710ca";
 
 export default function EmailCaptureSection() {
   return (
-    <section className="py-20 px-6 bg-white">
-      <div className="mx-auto max-w-xl text-center">
-        <h2 className="text-3xl font-semibold">Join the Drop</h2>
-        <p className="mt-3 text-gray-600">
+    <section id="email-capture" className="bg-white py-20 px-6">
+      <div className="text-center">
+        <h2 className="text-2xl font-semibold tracking-tight">Join the Drop</h2>
+        <p className="mt-2 text-zinc-600">
           Get first access to the Leroy Kelly Forever hat release…plus legacy
           updates.
         </p>
@@ -18,19 +18,18 @@ export default function EmailCaptureSection() {
           method="post"
           target="_blank"
           noValidate
-          className="mt-8 flex flex-col sm:flex-row gap-3 items-center justify-center"
+          className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-center"
         >
           <input
             type="email"
             name="EMAIL"
             required
             placeholder="Email address"
-            className="w-full sm:w-80 px-4 py-3 border rounded-lg"
+            className="w-full sm:w-80 px-4 py-3 border border-zinc-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-zinc-300"
           />
 
           <input type="hidden" name="REFCODE" value="GENERAL" />
 
-          {/* Mailchimp bot-trap (leave this exactly like this) */}
           <div
             style={{ position: "absolute", left: "-5000px" }}
             aria-hidden="true"
@@ -45,13 +44,13 @@ export default function EmailCaptureSection() {
 
           <button
             type="submit"
-            className="w-full sm:w-auto px-6 py-3 rounded-lg bg-black text-white font-semibold hover:opacity-90 transition"
+            className="w-full sm:w-auto px-6 py-3 rounded-xl bg-black text-white font-semibold hover:bg-zinc-800"
           >
             Notify Me
           </button>
         </form>
 
-        <p className="mt-4 text-xs text-gray-500">
+        <p className="mt-3 text-sm text-zinc-500">
           No spam…just important updates.
         </p>
       </div>
