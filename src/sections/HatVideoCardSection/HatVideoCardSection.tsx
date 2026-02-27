@@ -3,14 +3,6 @@ export default function HatVideoCardSection() {
     <section className="bg-white">
       <div className="mx-auto max-w-6xl px-6 py-16">
         <div className="mx-auto max-w-xl text-center">
-          <p className="text-xs tracking-[0.35em] uppercase text-zinc-500">
-            Limited Collectible Drop
-          </p>
-
-          <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-zinc-950">
-            The First 50 Hats
-          </h2>
-
           <p className="mt-4 text-zinc-600 leading-relaxed">
             This first release is capped at 50. Join the list to unlock first
             access.
