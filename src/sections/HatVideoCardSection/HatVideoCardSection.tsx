@@ -1,51 +1,90 @@
+import { Button, Card, ScarcityBadge } from "../../components";
+
 export default function HatVideoCardSection() {
+  // Phase 2: Replace with actual Shopify variant ID
+  // const VARIANT_ID = "YOUR_VARIANT_ID_HERE";
+  const SHOPIFY_CART_URL =
+    "https://3u8jjdepw0t4gs3x-98493432090.shopifypreview.com/cart/YOUR_VARIANT_ID:1?discount=BACKERS50";
+
   return (
     <section className="bg-white">
       <div className="mx-auto max-w-6xl px-6 py-16">
-        <div className="mx-auto max-w-xl text-center">
-          <p className="mt-4 text-zinc-600 leading-relaxed">
-            This first release is capped at 50. Join the list to unlock first
-            access.
-          </p>
+        {/* Scarcity Block */}
+        <div className="mx-auto max-w-xl text-center mb-12 animate-fadeIn">
+          <ScarcityBadge />
         </div>
 
-        <div className="mt-10 mx-auto max-w-xl rounded-3xl border border-zinc-200 bg-zinc-50 p-4 shadow-sm">
-          {/* video placeholder (we’ll swap in your actual clip next) */}
-          <div className="aspect-[9/11] w-full overflow-hidden rounded-2xl bg-zinc-200" />
+        {/* Product Card */}
+        <Card
+          variant="elevated"
+          padding="sm"
+          rounded="3xl"
+          className="mx-auto max-w-xl animate-slideUp"
+        >
+          {/* Product Video */}
+          <div className="aspect-[9/11] w-full overflow-hidden rounded-2xl bg-zinc-900 relative">
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="w-full h-full object-cover"
+            >
+              <source src="/video/hat-loop.mp4" type="video/mp4" />
+              <img
+                src="/images/lkWithHat.jpg"
+                alt="Leroy Kelly Forever Hat"
+                className="w-full h-full object-cover"
+              />
+            </video>
+          </div>
 
-          <div className="p-4">
+          <div className="p-5 space-y-4">
+            {/* Header */}
             <div className="flex items-center justify-between">
-              <p className="text-sm font-semibold text-zinc-900">
+              <h3 className="text-base font-semibold text-zinc-900">
                 Leroy Kelly Forever Hat
-              </p>
-              <p className="text-xs tracking-[0.35em] uppercase text-zinc-500">
+              </h3>
+              <span className="text-[10px] tracking-[0.35em] uppercase text-zinc-500">
                 Drop #1
-              </p>
+              </span>
             </div>
 
-            <p className="mt-2 text-sm font-medium text-zinc-500 tracking-wide">
-              50 Available • Edition I
-            </p>
+            {/* Edition Info */}
+            <div className="flex items-center gap-2 text-sm">
+              <span className="inline-flex items-center px-3 py-1 rounded-full bg-zinc-100 text-zinc-700 font-medium text-xs">
+                Edition I
+              </span>
+              <span className="text-zinc-500 text-xs">•</span>
+              <span className="text-zinc-600 text-xs">Limited to 50</span>
+            </div>
 
-            <p className="mt-2 text-sm text-zinc-600">
-              Product video + photos coming next. This card will show the
-              rotating hat clip.
-            </p>
-
-            <a
-              href="https://3u8jjdepw0t4gs3x-98493432090.shopifypreview.com/products_preview?preview_key=84f50be696c1fcf0381930d8df911f7f"
+            {/* CTA Button */}
+            <Button
+              variant="primary"
+              size="lg"
+              href={SHOPIFY_CART_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full sm:w-auto px-6 py-3 rounded-xl bg-black text-white font-semibold hover:bg-zinc-800 inline-block text-center"
+              className="w-full"
             >
-              Buy Now
-            </a>
+              Secure Now
+            </Button>
 
-            <p className="mt-3 text-xs text-zinc-500 text-center">
-              Brooklyn… Leroy’s granddaughter… is helping lead this legacy drop.
+            {/* Microcopy */}
+            <p className="text-xs text-center text-zinc-500">
+              Ships within 48 hours
             </p>
+
+            {/* Family Story */}
+            <div className="pt-3 border-t border-zinc-200">
+              <p className="text-xs text-zinc-600 text-center leading-relaxed">
+                Brooklyn, Leroy's granddaughter, is helping lead this legacy
+                drop.
+              </p>
+            </div>
           </div>
-        </div>
+        </Card>
       </div>
     </section>
   );
