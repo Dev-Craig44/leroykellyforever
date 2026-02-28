@@ -7,7 +7,7 @@ import SealSection from "../../sections/SealSection";
 export default function Drop() {
   return (
     <main className="bg-white text-zinc-900">
-      <section className="px-6 pt-20 pb-10 text-center">
+      <section className="px-6 pt-20 pb-10 text-center animate-fadeIn">
         <p className="text-xs tracking-[0.35em] text-zinc-500 uppercase">
           Edition I
         </p>
@@ -19,9 +19,9 @@ export default function Drop() {
         </p>
       </section>
       <HatVideoCardSection />
+      <EmailCaptureSection />
       <SealSection />
       <LegacyStatsSection />
-      <EmailCaptureSection />
       <FooterSection />
     </main>
   );

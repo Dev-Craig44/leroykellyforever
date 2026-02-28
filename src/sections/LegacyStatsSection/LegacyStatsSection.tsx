@@ -4,7 +4,10 @@ export default function LegacyStatsSection() {
       <div className="mx-auto max-w-6xl px-6 pb-16 text-center">
         <div className="mt-12">
           <div className="mx-auto max-w-md text-center space-y-12">
-            <div>
+            <div
+              className="animate-fadeIn"
+              style={{ animationDelay: "0.1s", animationFillMode: "both" }}
+            >
               <p className="text-4xl font-extrabold tracking-tight text-zinc-950">
                 1964–1973
               </p>
@@ -13,7 +16,10 @@ export default function LegacyStatsSection() {
               </p>
             </div>
 
-            <div>
+            <div
+              className="animate-fadeIn"
+              style={{ animationDelay: "0.3s", animationFillMode: "both" }}
+            >
               <p className="text-4xl font-extrabold tracking-tight text-zinc-950">
                 Hall of Fame
               </p>
@@ -22,7 +28,10 @@ export default function LegacyStatsSection() {
               </p>
             </div>
 
-            <div>
+            <div
+              className="animate-fadeIn"
+              style={{ animationDelay: "0.5s", animationFillMode: "both" }}
+            >
               <p className="text-4xl font-extrabold tracking-tight text-zinc-900">
                 7,274
               </p>
