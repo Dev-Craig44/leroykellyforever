@@ -79,7 +79,7 @@ export default function HatVideoCardSection() {
             {/* Family Story */}
             <div className="pt-3 border-t border-zinc-200">
               <p className="text-xs text-zinc-600 text-center leading-relaxed">
-                Brooklyn, Leroy's granddaughter, is helping lead this legacy
+                Brooklynn, Leroy's granddaughter, is helping lead this legacy
                 drop.
               </p>
             </div>

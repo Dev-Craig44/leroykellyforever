@@ -14,6 +14,11 @@ export default function Drop() {
         path="/drop"
       />
       <section className="px-6 pt-20 pb-10 text-center animate-fadeIn">
+        <img
+          src="/logos/L_Kelly_logo_master_nosquare.png"
+          alt="Leroy Kelly Forever"
+          className="mx-auto w-32 h-auto mb-8 opacity-90"
+        />
         <p className="text-xs tracking-[0.35em] text-zinc-500 uppercase">
           Edition I
         </p>
@@ -25,9 +30,9 @@ export default function Drop() {
         </p>
       </section>
       <HatVideoCardSection />
+      <LegacyStatsSection />
       <EmailCaptureSection />
       <SealSection />
-      <LegacyStatsSection />
       <FooterSection />
     </main>
   );
