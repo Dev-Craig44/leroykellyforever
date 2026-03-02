@@ -59,6 +59,10 @@ export interface InventoryDashboardResponse {
     "20": number;
   };
   products: any[];
+  // Optional metadata from backend
+  ts?: string;
+  source?: string;
+  cached?: boolean;
 }
 
 export const api = {
