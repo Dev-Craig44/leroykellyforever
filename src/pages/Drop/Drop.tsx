@@ -37,11 +37,22 @@ export default function Drop() {
         </h1>
 
         <p className="mx-auto mt-4 max-w-md text-zinc-600">
-          A controlled release. {available} hats. Private access required.
+          {available > 0 ? (
+            <>
+              A controlled release. {available}{" "}
+              {available === 1 ? "hat" : "hats"}. Private access required.
+            </>
+          ) : (
+            <>Allocation complete. Join the list for the next release.</>
+          )}
         </p>
 
         <div className="mt-3 text-xs text-zinc-500">
-          {loading ? "Checking allocation…" : "Allocation verified."}
+          {loading
+            ? "Checking allocation…"
+            : available > 0
+              ? "Allocation verified."
+              : "Edition I fully allocated."}
         </div>
       </section>
 
