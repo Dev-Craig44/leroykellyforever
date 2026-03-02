@@ -6,20 +6,36 @@ type UseInventoryResult = {
   loading: boolean;
   error: string | null;
   meta?: {
-    variants?: number;
-    ts?: string;
-    source?: string;
+    count?: number;
+    fetchedAt?: string;
+    ttlMs?: number;
     cached?: boolean;
   };
 };
 
 const FALLBACK_AVAILABLE = 50;
 
-// module-level cache so multiple mounts don't spam the API
 let cache: { value: UseInventoryResult | null; expiresAt: number } = {
   value: null,
   expiresAt: 0,
 };
+
+function sumAvailable(items: any[] | undefined): number | null {
+  if (!Array.isArray(items)) return null;
+
+  let total = 0;
+  let sawNumber = false;
+
+  for (const item of items) {
+    const n = item?.available;
+    if (typeof n === "number" && Number.isFinite(n)) {
+      total += n;
+      sawNumber = true;
+    }
+  }
+
+  return sawNumber ? total : null;
+}
 
 export function useInventory(options?: {
   limit?: number;
@@ -44,7 +60,6 @@ export function useInventory(options?: {
     async function load() {
       const now = Date.now();
 
-      // serve cache if valid
       if (cache.value && now < cache.expiresAt) {
         setState(cache.value);
         return;
@@ -53,29 +68,25 @@ export function useInventory(options?: {
       setState((prev) => ({ ...prev, loading: true, error: null }));
 
       try {
-        // lighter + perfect for Drop page
         const result = await api.inventorySummary(limit);
 
         if (!aliveRef.current) return;
 
+        // Your summary returns { items: [{ available: number }], ... }
+        // We compute allocation from items.
+        const computed = sumAvailable(result?.items);
+
         const available =
-          typeof result?.totalAvailable === "number"
-            ? result.totalAvailable
-            : typeof result?.totals?.totalAvailable === "number"
-              ? result.totals.totalAvailable // tolerate alternate shape
-              : fallbackAvailable;
+          typeof computed === "number" ? computed : fallbackAvailable;
 
         const next: UseInventoryResult = {
           available,
           loading: false,
           error: null,
           meta: {
-            variants:
-              typeof result?.variants === "number"
-                ? result.variants
-                : result?.totals?.variants,
-            ts: result?.ts,
-            source: result?.source,
+            count: result?.count,
+            fetchedAt: result?.fetchedAt,
+            ttlMs: result?.ttlMs,
             cached: result?.cached,
           },
         };
@@ -85,14 +96,12 @@ export function useInventory(options?: {
       } catch (err: any) {
         if (!aliveRef.current) return;
 
-        // fail-soft: never break Drop page
         const next: UseInventoryResult = {
           available: fallbackAvailable,
           loading: false,
           error: String(err?.message || err),
         };
 
-        // short cache so we don't hammer during outage
         cache = { value: next, expiresAt: Date.now() + 5_000 };
         setState(next);
       }
