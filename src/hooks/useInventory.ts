@@ -77,7 +77,9 @@ export function useInventory(options?: {
         const computed = sumAvailable(result?.items);
 
         const available =
-          typeof computed === "number" ? computed : fallbackAvailable;
+          typeof computed === "number"
+            ? Math.max(0, computed)
+            : fallbackAvailable;
 
         const next: UseInventoryResult = {
           available,
