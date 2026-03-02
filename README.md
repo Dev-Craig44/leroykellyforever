@@ -160,6 +160,35 @@ Future tiers unlock:
 
 ---
 
+## Active Discount Codes (Edition I)
+
+The following discount codes are scheduled in Shopify for Phase 1 allocation:
+
+| Code            | Club              | Discount   | Usage Limit    | Status    |
+| --------------- | ----------------- | ---------- | -------------- | --------- |
+| `LK-CLEHEIGHTS` | Cleveland Heights | $25.00 off | Once per order | Scheduled |
+| `LK-HINGETOWN`  | Hingetown         | $25.00 off | Once per order | Scheduled |
+| `LK-WESTPARK`   | West Park         | $25.00 off | Once per order | Scheduled |
+| `LK-TWIST`      | Twist             | $25.00 off | Once per order | Scheduled |
+| `LK-MUNILOT`    | Municipal Lot     | $25.00 off | Once per order | Scheduled |
+
+**Product Application:**
+
+- Leroy Kelly Forever Hat - Edition I
+
+**Allocation Method:**
+
+- Direct Shopify cart link with pre-applied discount code
+- Format: `https://STORE.myshopify.com/cart/VARIANT_ID:1?discount=CODE`
+
+**Tracking:**
+
+- Usage count tracked per code in Shopify admin
+- Global inventory cap: 50 units
+- Presidents window: 48 hours from activation
+
+---
+
 # 🌐 Production Infrastructure
 
 ## Frontend
