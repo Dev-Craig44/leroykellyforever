@@ -41,27 +41,62 @@ Edition I is part of a generational legacy initiative led by family.
 # 🚀 Tech Stack
 
 ## Frontend
-- React 19
-- TypeScript
-- Vite 7
-- Tailwind CSS
-- React Router
-- Shopify Cart Link integration
-- Mailchimp (custom authenticated domain)
+
+- **React 19** - Latest React with modern hooks
+- **TypeScript** - Type-safe components and pages
+- **Vite 7.3.1** - Lightning-fast build tool and dev server
+- **Tailwind CSS** - Utility-first styling with custom animations
+- **React Router** - Client-side routing
+- **Shopify** - E-commerce backend with cart link integration
+- **Mailchimp** - Email capture with custom domain authentication
 
 ## Backend (API Layer)
-- Node.js (NVM-managed)
-- Express
-- PM2
-- Nginx (reverse proxy)
-- Let's Encrypt SSL (Certbot)
-- Hosted on DigitalOcean Droplet
-- Domain: api.leroykellyforever.com
+
+- **Node.js** (NVM-managed)
+- **Express** - REST API framework
+- **PM2** - Process manager for zero-downtime restarts
+- **Nginx** - Reverse proxy
+- **Let's Encrypt SSL** - Via Certbot
+- **Hosted on DigitalOcean Droplet**
+- **Domain**: api.leroykellyforever.com
 
 ## E-commerce Engine
-- Shopify (inventory + checkout)
-- Discount code–based allocation control
-- Cart-link direct checkout strategy
+
+- **Shopify** - Inventory + checkout
+- **Discount code–based allocation control**
+- **Cart-link direct checkout strategy**
+
+---
+
+## ✨ Features
+
+### Reusable Component Library
+
+- **Button** - 3 variants (primary, secondary, outline), 3 sizes, link support
+- **Card** - Flexible container with elevation styles
+- **ScarcityBadge** - Inventory display with real-time API integration
+- **MetaTags** - Dynamic SEO with OpenGraph and Twitter Card support
+
+### Custom Animations
+
+- `fadeIn` - Smooth opacity transitions
+- `slideUp` - Vertical entrance effects
+- `scaleIn` - Zoom-in product reveals
+
+### SEO & Meta
+
+- Dynamic page titles and descriptions
+- OpenGraph tags for social sharing
+- Twitter Card integration
+- Favicon with L. Kelly logo
+- Semantic HTML structure
+
+### Product Integration
+
+- Autoplay video loop (`hat-loop.mp4`)
+- Product images and branding assets
+- Shopify cart integration with discount codes
+- Real-time inventory scarcity messaging
 
 ---
 
@@ -72,6 +107,7 @@ Edition I uses a soft gate allocation model.
 ## Total Inventory: 50 units
 
 ### Presidents Window (48 hours)
+
 - Each invited Backers Club receives a unique discount code
 - Each code limited to 3 uses
 - Total inventory capped at 50
@@ -91,11 +127,13 @@ This creates:
 Each club receives a unique code.
 
 Example:
+
 - LK-CLE
 - LK-NJ
 - LK-ATL
 
 Each code:
+
 - Applies to Edition I hat only
 - Fixed dollar discount
 - Usage limit: 3
@@ -126,87 +164,434 @@ Future tiers unlock:
 
 ## Frontend
 
-Deployed on Vercel  
+Deployed on **Vercel**  
 Domain: https://leroykellyforever.com
 
-Auto-deploy from main branch.
+Auto-deploy from `main` branch.
+
+- Production URL: `https://leroykellyforever.com`
+- Preview URLs: Auto-generated for PRs
+
+### Environment Config
+
+Set in Vercel dashboard:
+
+- `VITE_API_BASE_URL` - Backend API (default: https://api.leroykellyforever.com)
+- `VITE_SHOPIFY_VARIANT_ID` - Product variant for cart links
+
+---
+
+## 🛠️ Local Development
+
+### Prerequisites
+
+- Node.js 18+
+- npm or yarn
+
+### Setup
+
+```bash
+# Install dependencies
+npm install
+
+# Start dev server
+npm run dev
+
+# Build for production
+npm run build
+
+# Preview production build
+npm run preview
+```
+
+### Environment Variables
+
+Create a `.env` file in the root:
+
+```env
+VITE_API_BASE_URL=http://localhost:4000
+VITE_SHOPIFY_VARIANT_ID=your_shopify_variant_id
+```
+
+---
+
+## 📁 Project Structure
+
+```
+src/
+├── components/          # Reusable UI components
+│   ├── Button.tsx
+│   ├── Card.tsx
+│   ├── ScarcityBadge.tsx
+│   └── MetaTags.tsx
+├── hooks/              # Custom React hooks
+│   └── useInventory.ts # Shopify inventory API integration
+├── lib/                # Utility libraries
+│   └── api.ts         # API client with TypeScript types
+├── pages/              # Route-level pages
+│   ├── Home/
+│   │   └── Home.tsx    # Landing page
+│   ├── Drop/
+│   │   └── Drop.tsx    # Product allocation page
+│   └── DevInventory/   # Development inventory dashboard
+├── sections/           # Page section components
+│   ├── HeroSection/
+│   ├── HatVideoCardSection/
+│   ├── EmailCaptureSection/
+│   ├── LegacyStatsSection/
+│   ├── CtaSection/
+│   ├── SealSection/
+│   └── Footer/
+└── config/
+    └── siteConfig.js   # Global configuration
+```
 
 ---
 
 ---
 
-## API Backend (DigitalOcean)
+## API Backend (DigitalOcean Droplet)
 
-### Stack
+### Stack Overview
 
-- Ubuntu Droplet
-- Node via NVM
-- PM2 process manager
-- Nginx reverse proxy
-- SSL via Let's Encrypt
-- Domain: api.leroykellyforever.com
+- **Platform**: DigitalOcean Ubuntu 22.04 Droplet
+- **Runtime**: Node.js (managed via NVM)
+- **Process Manager**: PM2 (for zero-downtime restarts)
+- **Web Server**: Nginx (reverse proxy)
+- **SSL**: Let's Encrypt (via Certbot)
+- **Domain**: `api.leroykellyforever.com`
+- **Port**: 4000 (internal)
+
+### Initial Server Setup
+
+1. **Clone the API repository**
+
+   ```bash
+   cd ~
+   git clone https://github.com/YOUR_USERNAME/lk-api.git
+   cd lk-api
+   ```
+
+2. **Install dependencies**
+
+   ```bash
+   npm ci --production
+   ```
+
+3. **Create environment file**
+
+   ```bash
+   cp .env.example .env
+   nano .env
+   ```
+
+   Required environment variables:
+
+   ```env
+   # Shopify Configuration
+   SHOPIFY_SHOP_DOMAIN=your-store.myshopify.com
+   SHOPIFY_ADMIN_ACCESS_TOKEN=shpat_xxxxxxxxxxxxx
+   SHOPIFY_API_VERSION=2024-01
+
+   # Server Configuration
+   PORT=4000
+   NODE_ENV=production
+
+   # CORS Configuration
+   CORS_ORIGIN=https://leroykellyforever.com
+   ```
+
+### PM2 Process Management
+
+1. **Start the API with PM2**
+
+   ```bash
+   pm2 start src/index.js --name lk-api
+   pm2 save
+   ```
+
+2. **Configure PM2 to start on system boot**
+
+   ```bash
+   pm2 startup
+   # Follow the command output and run the suggested systemd command
+   ```
+
+3. **Restart with updated environment variables**
+
+   ```bash
+   pm2 restart lk-api --update-env
+   ```
+
+4. **Monitor logs**
+   ```bash
+   pm2 logs lk-api
+   pm2 monit
+   pm2 status
+   ```
+
+### Nginx Configuration
+
+1. **Create Nginx server block**
+
+   ```bash
+   sudo nano /etc/nginx/sites-available/api.leroykellyforever.com
+   ```
+
+   ```nginx
+   server {
+       listen 80;
+       server_name api.leroykellyforever.com;
+
+       location / {
+           proxy_pass http://127.0.0.1:4000;
+           proxy_http_version 1.1;
+           proxy_set_header Upgrade $http_upgrade;
+           proxy_set_header Connection 'upgrade';
+           proxy_set_header Host $host;
+           proxy_set_header X-Real-IP $remote_addr;
+           proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+           proxy_set_header X-Forwarded-Proto $scheme;
+           proxy_cache_bypass $http_upgrade;
+       }
+   }
+   ```
+
+2. **Enable the site**
+   ```bash
+   sudo ln -s /etc/nginx/sites-available/api.leroykellyforever.com /etc/nginx/sites-enabled/
+   sudo nginx -t
+   sudo systemctl reload nginx
+   ```
+
+### SSL Certificate Setup
+
+1. **Install Certbot**
+
+   ```bash
+   sudo apt install certbot python3-certbot-nginx
+   ```
+
+2. **Obtain SSL certificate**
+
+   ```bash
+   sudo certbot --nginx -d api.leroykellyforever.com
+   ```
+
+3. **Verify auto-renewal**
+   ```bash
+   sudo certbot renew --dry-run
+   ```
+
+### Health Checks & Verification
+
+```bash
+# Test health endpoint
+curl https://api.leroykellyforever.com/health
+
+# Test products endpoint
+curl https://api.leroykellyforever.com/products
+
+# Test inventory summary
+curl https://api.leroykellyforever.com/inventory/summary
+
+# Test low stock
+curl https://api.leroykellyforever.com/inventory/low-stock
+
+# Test dashboard
+curl https://api.leroykellyforever.com/dashboard/inventory
+```
+
+### Troubleshooting
+
+#### DNS & Port Issues
+
+- **Verify DNS resolution**: `nslookup api.leroykellyforever.com`
+- **Check port listeners**: `sudo lsof -iTCP -sTCP:LISTEN -n -P | grep -E ":(80|443|4000)"`
+- **Check firewall**: Ensure ports 80 and 443 are open in DigitalOcean firewall settings
+
+#### CORS Errors
+
+- Verify `CORS_ORIGIN` in `.env` matches your frontend domain exactly
+- Check Nginx proxy headers are properly forwarding origin information
+- Restart PM2 after environment changes: `pm2 restart lk-api --update-env`
+
+#### Nginx Configuration Issues
+
+- **Server name conflicts**: `sudo grep -r "server_name api.leroykellyforever.com" /etc/nginx/sites-enabled/`
+- **Test configuration**: `sudo nginx -t`
+- **View error logs**: `sudo tail -f /var/log/nginx/error.log`
+- **Check 80→443 redirects**: Certbot should auto-configure HTTPS redirects
+
+#### PM2 Issues
+
+- **Missing PID directory**: `mkdir -p ~/.pm2 && touch ~/.pm2/pm2.pid`
+- **Systemd service not starting**:
+  ```bash
+  systemctl status pm2-blaze  # or pm2-YOUR_USERNAME
+  sudo systemctl restart pm2-blaze
+  ```
+- **View PM2 logs**: `pm2 logs lk-api --lines 100`
+- **Environment not updating**: Always use `pm2 restart lk-api --update-env` after `.env` changes
+
+#### Service Status Checks
+
+```bash
+# Check Nginx
+sudo systemctl status nginx
+
+# Check PM2
+pm2 status
+
+# Check system services
+systemctl list-units --type=service --state=running | grep pm2
+
+# View all listeners
+sudo ss -tulpn
+```
 
 ---
 
 ## Deployment Workflow
 
-Local changes  
-→ git commit  
-→ git push  
-→ SSH into droplet  
-→ git pull  
-→ npm install (if needed)  
-→ pm2 restart lk-api --update-env  
+**Standard update workflow:**
 
-Production files are not edited directly except:
+```bash
+# Local machine
+git add .
+git commit -m "feat: description"
+git push origin main
 
-- .env
-- Nginx configs
-- Certbot configs
+# On droplet (via SSH)
+cd ~/lk-api
+git pull origin main
+npm ci --production  # if package.json changed
+pm2 restart lk-api --update-env
+pm2 logs lk-api  # verify restart
+```
 
-GitHub remains source of truth.
+**Production files not edited directly except:**
+
+- `.env` - Environment variables
+- Nginx configs - `/etc/nginx/sites-available/`
+- Certbot configs - Managed by certbot
+
+**GitHub remains source of truth.**
 
 ---
 
 # 🔌 API Endpoints
 
+All endpoints return JSON and include CORS headers for `leroykellyforever.com`.
+
 ## Health
+
+```bash
 GET /health
+```
+
+Returns server status and uptime.
+
+## Products
+
+```bash
+GET /products?limit=5
+```
+
+Returns Shopify products with inventory levels. Cached for 5 minutes.
 
 ## Inventory Summary
+
+```bash
 GET /inventory/summary?limit=50
+```
 
 Returns:
-- Aggregated available inventory
+
+- Aggregated available inventory across all variants
 - Cached status
 - Fetch timestamp
 
-## Dashboard
-GET /dashboard/inventory?limit=50
+Cached for 5 minutes.
 
-Returns:
-- Total available
+## Low Stock Check
+
+```bash
+GET /inventory/low-stock?threshold=10&limit=50
+```
+
+Returns products below the specified threshold. Cached for 5 minutes.
+
+## Dashboard
+
+```bash
+GET /dashboard/inventory?limit=50
+```
+
+Returns comprehensive inventory data including:
+
+- Total available inventory
 - Variant count
-- Low stock tiers
-- Product breakdown
+- Low stock tiers (≤5, ≤10, ≤20)
+- Product breakdown with inventory levels
+
+Cached for 5 minutes.
 
 ---
 
 # 🛠 Frontend Inventory Integration
 
-Custom hook:
+### API Client (`src/lib/api.ts`)
 
-src/hooks/useInventory.ts
+TypeScript API client with proper type definitions:
 
-Features:
+- Uses `VITE_API_BASE_URL` environment variable
+- Falls back to `https://api.leroykellyforever.com` in production
+- Provides typed methods for all API endpoints
+- Built-in timeout handling (4s default)
+- Proper error handling
 
-- Real-time inventory pull
-- Fail-soft fallback
-- 30-second cache
-- Summed inventory from Shopify variants
+**Available methods:**
+
+- `api.health()` - Health check
+- `api.products(limit)` - Fetch products
+- `api.inventorySummary(limit)` - Inventory summary
+- `api.lowStock(threshold, limit)` - Low stock items
+- `api.inventoryDashboard(limit)` - Dashboard data
+
+### Custom Hook (`src/hooks/useInventory.ts`)
+
+React hook for real-time inventory integration:
+
+**Features:**
+
+- Real-time inventory pull from Shopify via API
+- Fail-soft fallback (defaults to 50 if API fails)
+- 30-second client-side cache
+- Sums inventory from all Shopify variants
 - Never breaks drop page during API failure
+- Returns loading states and error handling
 
-Drop page dynamically updates allocation count.
+**Usage:**
+
+```typescript
+const { available, loading, error, meta } = useInventory();
+```
+
+Drop page dynamically updates allocation count without page refresh.
+
+### Development Inventory Page
+
+`src/pages/DevInventory/DevInventory.jsx`
+
+Development-only component for testing:
+
+- Calls `api.inventoryDashboard()` on mount
+- Displays total available inventory
+- Shows variant counts and low stock items
+- Renders full product data for verification
+
+Access via routing in development (not exposed in production).
 
 ---
 
@@ -246,30 +631,99 @@ Future phases:
 
 # 📨 Email Infrastructure
 
-- Google Workspace
-- DKIM authenticated
-- Mailchimp custom domain
-- Sender: info@leroykellyforever.com
-- Optimized for inbox placement
+Professional email infrastructure built for trust and deliverability.
+
+### Setup
+
+- **Domain**: `leroykellyforever.com` (Google-managed DNS)
+- **Google Workspace**: Business Starter plan
+- **Sender Address**: `info@leroykellyforever.com`
+- **Mailchimp Integration**: Custom domain authenticated
+
+### Authentication & Deliverability
+
+- ✅ **DKIM authentication** configured
+- ✅ **Domain ownership** verified in Mailchimp
+- ✅ **DNS records** optimized for inbox placement
+- ✅ **Tested email flow** between external accounts
+
+### Benefits
+
+- Prevents "via mailchimp.com" warnings
+- Avoids spam classification from shared senders
+- Establishes verified sender identity
+- Builds trust with professional branded emails
+- Scalable for future campaigns
 
 ---
 
 # 🗂 Project Structure
 
+```
 src/
-├── components/
-├── hooks/
-├── pages/
-├── sections/
+├── components/          # Reusable UI components
+│   ├── Button.tsx
+│   ├── Card.tsx
+│   ├── ScarcityBadge.tsx
+│   └── MetaTags.tsx
+├── hooks/              # Custom React hooks
+│   └── useInventory.ts # Shopify inventory API integration
+├── lib/                # Utility libraries
+│   └── api.ts         # API client with TypeScript types
+├── pages/              # Route-level pages
+│   ├── Home/
+│   │   └── Home.tsx    # Landing page
+│   ├── Drop/
+│   │   └── Drop.tsx    # Product allocation page
+│   └── DevInventory/   # Development inventory dashboard
+├── sections/           # Page section components
+│   ├── HeroSection/
+│   ├── HatVideoCardSection/
+│   ├── EmailCaptureSection/
+│   ├── LegacyStatsSection/
+│   ├── CtaSection/
+│   ├── SealSection/
+│   └── Footer/
 └── config/
+    └── siteConfig.js   # Global configuration
+```
 
 Modular, extensible, open-for-extension architecture.
+
+---
+
+## 🎯 User Flow & Conversion Strategy
+
+### Home Page (`/`)
+
+1. Hero with L. Kelly logo and brand messaging
+2. Legacy stats (7,274 yards, Hall of Fame credentials)
+3. "View Edition I" CTA → directs to Drop page
+4. Footer with social links
+
+### Drop Page (`/drop`)
+
+1. Hero with logo and "The First 50" messaging
+2. **Real-time inventory badge** - Updates dynamically from API
+3. **Product card** with video loop
+4. **"Secure Now" CTA** - Direct cart link with discount code
+5. **Legacy stats** for trust and context
+6. **Email capture** for soft conversion
+7. **Seal section** with authenticity badge
+8. Footer
+
+### Allocation States
+
+- **Active**: Inventory available, CTA enabled
+- **Low Stock**: Visual urgency when < 10 units
+- **Complete**: Inventory depleted, alternative CTA shown
 
 ---
 
 # 📈 Roadmap
 
 ## Phase 1 (Complete)
+
 - Drop page
 - Cart link integration
 - Real-time inventory
@@ -278,12 +732,14 @@ Modular, extensible, open-for-extension architecture.
 - Discount allocation engine
 
 ## Phase 2
+
 - Presidents leaderboard tracking
 - Analytics integration
 - Allocation performance dashboard
 - Club tier system
 
 ## Phase 3
+
 - NFT gating
 - Referral engine
 - Tier-based unlocks
@@ -299,7 +755,7 @@ This is allocation.
 
 Frontend = Museum  
 Backend = Vault  
-Shopify = Fulfillment warehouse  
+Shopify = Fulfillment warehouse
 
 ---
 
