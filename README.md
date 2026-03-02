@@ -125,7 +125,280 @@ Set in Vercel dashboard:
 - `VITE_API_BASE_URL` - Backend API for email capture
 - `VITE_SHOPIFY_VARIANT_ID` - Product variant for cart links
 
-## 📨 Email Infrastructure
+## � API Backend (Shopify Integration)
+
+The backend API provides real-time Shopify inventory data and is deployed separately from the frontend.
+
+### Production Deployment (DigitalOcean Droplet)
+
+**Stack:**
+
+- **Platform**: DigitalOcean Ubuntu 22.04 Droplet
+- **Runtime**: Node.js (managed via NVM)
+- **Process Manager**: PM2 (for zero-downtime restarts)
+- **Web Server**: Nginx (reverse proxy)
+- **SSL**: Let's Encrypt (via Certbot)
+- **Domain**: `api.leroykellyforever.com`
+
+### Initial Server Setup
+
+1. **Clone the API repository**
+
+   ```bash
+   cd ~
+   git clone https://github.com/YOUR_USERNAME/lk-api.git
+   cd lk-api
+   ```
+
+2. **Install dependencies**
+
+   ```bash
+   npm install
+   ```
+
+3. **Create environment file**
+
+   ```bash
+   cp .env.example .env
+   nano .env
+   ```
+
+   Required environment variables:
+
+   ```env
+   # Shopify Configuration
+   SHOPIFY_SHOP_DOMAIN=your-store.myshopify.com
+   SHOPIFY_ADMIN_ACCESS_TOKEN=shpat_xxxxxxxxxxxxx
+   SHOPIFY_API_VERSION=2024-01
+
+   # Server Configuration
+   PORT=4000
+   NODE_ENV=production
+
+   # CORS Configuration
+   CORS_ORIGIN=https://leroykellyforever.com
+   ```
+
+### PM2 Process Management
+
+1. **Start the API with PM2**
+
+   ```bash
+   pm2 start server.js --name lk-api
+   pm2 save
+   ```
+
+2. **Configure PM2 to start on system boot**
+
+   ```bash
+   pm2 startup
+   # Follow the command output and run the suggested systemd command
+   ```
+
+3. **Restart with updated environment variables**
+
+   ```bash
+   pm2 restart lk-api --update-env
+   ```
+
+4. **Monitor logs**
+   ```bash
+   pm2 logs lk-api
+   pm2 monit
+   ```
+
+### Nginx Configuration
+
+1. **Create Nginx server block**
+
+   ```bash
+   sudo nano /etc/nginx/sites-available/api.leroykellyforever.com
+   ```
+
+   ```nginx
+   server {
+       listen 80;
+       server_name api.leroykellyforever.com;
+
+       location / {
+           proxy_pass http://127.0.0.1:4000;
+           proxy_http_version 1.1;
+           proxy_set_header Upgrade $http_upgrade;
+           proxy_set_header Connection 'upgrade';
+           proxy_set_header Host $host;
+           proxy_set_header X-Real-IP $remote_addr;
+           proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+           proxy_set_header X-Forwarded-Proto $scheme;
+           proxy_cache_bypass $http_upgrade;
+       }
+   }
+   ```
+
+2. **Enable the site**
+   ```bash
+   sudo ln -s /etc/nginx/sites-available/api.leroykellyforever.com /etc/nginx/sites-enabled/
+   sudo nginx -t
+   sudo systemctl reload nginx
+   ```
+
+### SSL Certificate Setup
+
+1. **Install Certbot**
+
+   ```bash
+   sudo apt install certbot python3-certbot-nginx
+   ```
+
+2. **Obtain SSL certificate**
+
+   ```bash
+   sudo certbot --nginx -d api.leroykellyforever.com
+   ```
+
+3. **Verify auto-renewal**
+   ```bash
+   sudo certbot renew --dry-run
+   ```
+
+### API Endpoints
+
+All endpoints return JSON and include CORS headers for `leroykellyforever.com`.
+
+#### Health Check
+
+```bash
+GET /health
+```
+
+Returns server status and uptime.
+
+#### Products
+
+```bash
+GET /products?limit=5
+```
+
+Returns Shopify products with inventory levels. Cached for 5 minutes.
+
+#### Inventory Summary
+
+```bash
+GET /inventory/summary?limit=50
+```
+
+Returns aggregated inventory data across all variants. Cached for 5 minutes.
+
+#### Low Stock Check
+
+```bash
+GET /inventory/low-stock?threshold=10&limit=50
+```
+
+Returns products below the specified threshold. Cached for 5 minutes.
+
+#### Inventory Dashboard (Combined)
+
+```bash
+GET /dashboard/inventory?limit=50
+```
+
+Returns comprehensive inventory data including:
+
+- Total available inventory
+- Total number of variants
+- Low stock counts (≤5, ≤10, ≤20)
+- Full product details with inventory levels
+
+### Health Checks & Verification
+
+```bash
+# Test health endpoint
+curl https://api.leroykellyforever.com/health
+
+# Test products endpoint
+curl https://api.leroykellyforever.com/products
+
+# Test inventory summary
+curl https://api.leroykellyforever.com/inventory/summary
+
+# Test low stock
+curl https://api.leroykellyforever.com/inventory/low-stock
+
+# Test dashboard
+curl https://api.leroykellyforever.com/dashboard/inventory
+```
+
+### Troubleshooting
+
+#### DNS & Port Issues
+
+- **Verify DNS resolution**: `nslookup api.leroykellyforever.com`
+- **Check port listeners**: `sudo lsof -i :80` and `sudo lsof -i :443`
+- **Check firewall**: Ensure ports 80 and 443 are open in DigitalOcean firewall settings
+
+#### CORS Errors
+
+- Verify `CORS_ORIGIN` in `.env` matches your frontend domain exactly
+- Check Nginx proxy headers are properly forwarding origin information
+- Restart PM2 after environment changes: `pm2 restart lk-api --update-env`
+
+#### Nginx Configuration Issues
+
+- **Server name conflicts**: Check for duplicate `server_name` directives in `/etc/nginx/sites-enabled/`
+- **Test configuration**: `sudo nginx -t`
+- **View error logs**: `sudo tail -f /var/log/nginx/error.log`
+- **Check 80→443 redirects**: Certbot should auto-configure HTTPS redirects
+
+#### PM2 Issues
+
+- **Missing PID directory**: `mkdir -p ~/.pm2 && touch ~/.pm2/pm2.pid`
+- **Systemd service not starting**:
+  ```bash
+  systemctl status pm2-blaze  # or pm2-YOUR_USERNAME
+  sudo systemctl restart pm2-blaze
+  ```
+- **View PM2 logs**: `pm2 logs lk-api --lines 100`
+- **Environment not updating**: Always use `pm2 restart lk-api --update-env` after `.env` changes
+
+#### Service Status Checks
+
+```bash
+# Check Nginx
+sudo systemctl status nginx
+
+# Check PM2
+pm2 status
+
+# Check system services
+systemctl list-units --type=service --state=running | grep pm2
+
+# View all listeners
+sudo ss -tulpn
+```
+
+## 🧪 Frontend API Integration
+
+The frontend includes a test page and API client for Shopify inventory integration.
+
+### API Client (`src/lib/api.js`)
+
+- Uses `VITE_API_BASE_URL` environment variable
+- Falls back to `https://api.leroykellyforever.com` in production
+- Provides methods for all API endpoints with proper error handling
+
+### Inventory Test Page (`src/InventoryTest.jsx`)
+
+A development component that:
+
+- Calls `api.inventoryDashboard()` on mount
+- Displays total available inventory
+- Shows variant counts
+- Lists low stock items
+- Renders full product data for verification
+
+To view: Import in `main.jsx` during development.
+
+## �📨 Email Infrastructure
 
 Professional email infrastructure built for trust and deliverability.
 
