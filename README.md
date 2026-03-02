@@ -386,7 +386,7 @@ The frontend includes a test page and API client for Shopify inventory integrati
 - Falls back to `https://api.leroykellyforever.com` in production
 - Provides methods for all API endpoints with proper error handling
 
-### Inventory Test Page (`src/InventoryTest.jsx`)
+### Inventory Test Page (`src/pages/DevInventory/DevInventory.jsx`)
 
 A development component that:
 
@@ -396,7 +396,7 @@ A development component that:
 - Lists low stock items
 - Renders full product data for verification
 
-To view: Import in `main.jsx` during development.
+Access via routing in development (not exposed in production).
 
 ## �📨 Email Infrastructure
 
