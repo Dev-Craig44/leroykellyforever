@@ -1,13 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { api } from "../lib/api";
+
 type UseInventoryResult = {
   available: number;
   loading: boolean;
   error: string | null;
-  // optional debug metadata
   meta?: {
     variants?: number;
-    lowStock10?: number;
     ts?: string;
     source?: string;
     cached?: boolean;
@@ -16,17 +15,25 @@ type UseInventoryResult = {
 
 const FALLBACK_AVAILABLE = 50;
 
-// simple module-level cache to avoid re-fetching on every mount
+// module-level cache so multiple mounts don't spam the API
 let cache: { value: UseInventoryResult | null; expiresAt: number } = {
   value: null,
   expiresAt: 0,
 };
 
-export function useInventory(ttlMs = 30_000): UseInventoryResult {
+export function useInventory(options?: {
+  limit?: number;
+  ttlMs?: number;
+  fallbackAvailable?: number;
+}): UseInventoryResult {
+  const limit = options?.limit ?? 50;
+  const ttlMs = options?.ttlMs ?? 30_000;
+  const fallbackAvailable = options?.fallbackAvailable ?? FALLBACK_AVAILABLE;
+
   const [state, setState] = useState<UseInventoryResult>(() => {
     const now = Date.now();
     if (cache.value && now < cache.expiresAt) return cache.value;
-    return { available: FALLBACK_AVAILABLE, loading: true, error: null };
+    return { available: fallbackAvailable, loading: true, error: null };
   });
 
   const aliveRef = useRef(true);
@@ -46,23 +53,27 @@ export function useInventory(ttlMs = 30_000): UseInventoryResult {
       setState((prev) => ({ ...prev, loading: true, error: null }));
 
       try {
-        // NOTE: your api.inventoryDashboard(50) signature stays
-        const result = await api.inventoryDashboard(50);
+        // lighter + perfect for Drop page
+        const result = await api.inventorySummary(limit);
 
         if (!aliveRef.current) return;
 
         const available =
-          typeof result?.totals?.totalAvailable === "number"
-            ? result.totals.totalAvailable
-            : FALLBACK_AVAILABLE;
+          typeof result?.totalAvailable === "number"
+            ? result.totalAvailable
+            : typeof result?.totals?.totalAvailable === "number"
+              ? result.totals.totalAvailable // tolerate alternate shape
+              : fallbackAvailable;
 
         const next: UseInventoryResult = {
           available,
           loading: false,
           error: null,
           meta: {
-            variants: result?.totals?.variants,
-            lowStock10: result?.lowStockCounts?.["10"],
+            variants:
+              typeof result?.variants === "number"
+                ? result.variants
+                : result?.totals?.variants,
             ts: result?.ts,
             source: result?.source,
             cached: result?.cached,
@@ -70,21 +81,19 @@ export function useInventory(ttlMs = 30_000): UseInventoryResult {
         };
 
         cache = { value: next, expiresAt: Date.now() + ttlMs };
-
         setState(next);
       } catch (err: any) {
         if (!aliveRef.current) return;
 
-        // fail-soft: never break drop page
+        // fail-soft: never break Drop page
         const next: UseInventoryResult = {
-          available: FALLBACK_AVAILABLE,
+          available: fallbackAvailable,
           loading: false,
           error: String(err?.message || err),
         };
 
-        // cache the fallback briefly so we don't hammer the API during an outage
+        // short cache so we don't hammer during outage
         cache = { value: next, expiresAt: Date.now() + 5_000 };
-
         setState(next);
       }
     }
@@ -94,7 +103,7 @@ export function useInventory(ttlMs = 30_000): UseInventoryResult {
     return () => {
       aliveRef.current = false;
     };
-  }, [ttlMs]);
+  }, [limit, ttlMs, fallbackAvailable]);
 
   return state;
 }
