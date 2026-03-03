@@ -1,4 +1,5 @@
 import { Button, Card, ScarcityBadge } from "../../components";
+import { useInView } from "../../hooks/useInView";
 
 export default function HatVideoCardSection() {
   // Phase 2: Replace with actual Shopify variant ID
@@ -6,11 +7,17 @@ export default function HatVideoCardSection() {
   const SHOPIFY_CART_URL =
     "https://3u8jjdepw0t4gs3x-98493432090.shopifypreview.com/cart/YOUR_VARIANT_ID:1?discount=BACKERS50";
 
+  const { ref, isInView } = useInView({ threshold: 0.1 });
+
   return (
-    <section className="bg-zinc-50">
+    <section className="bg-zinc-50" ref={ref}>
       <div className="mx-auto max-w-6xl px-6 py-16">
         {/* Scarcity Block */}
-        <div className="mx-auto max-w-xl text-center mb-12 animate-fadeIn">
+        <div
+          className={`mx-auto max-w-xl text-center mb-12 transition-all duration-700 ${
+            isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          }`}
+        >
           <ScarcityBadge />
         </div>
 
@@ -19,16 +26,18 @@ export default function HatVideoCardSection() {
           variant="elevated"
           padding="sm"
           rounded="3xl"
-          className="mx-auto max-w-xl animate-slideUp"
+          className={`mx-auto max-w-xl transition-all duration-700 delay-200 ${
+            isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
+          }`}
         >
           {/* Product Video */}
-          <div className="aspect-[9/11] w-full overflow-hidden rounded-2xl bg-zinc-900 relative shadow-[inset_0_0_0_1px_rgba(255,255,255,0.1)]">
+          <div className="aspect-[9/11] w-full overflow-hidden rounded-2xl bg-zinc-900 relative shadow-[inset_0_0_0_1px_rgba(255,255,255,0.1)] group">
             <video
               autoPlay
               loop
               muted
               playsInline
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
             >
               <source src="/video/hat-loop.mp4" type="video/mp4" />
               <img

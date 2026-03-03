@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { useInView } from "../../hooks/useInView";
 
 export default function EmailCaptureSection() {
   const API_BASE = useMemo(() => {
@@ -59,19 +60,30 @@ export default function EmailCaptureSection() {
   }
 
   const isLoading = status === "loading";
+  const { ref, isInView } = useInView({ threshold: 0.2 });
 
   return (
-    <section id="email-capture" className="bg-zinc-50 py-20 px-6">
-      <div className="text-center">
+    <section id="email-capture" className="bg-zinc-50 py-20 px-6" ref={ref}>
+      <div
+        className={`text-center transition-all duration-700 ${
+          isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+        }`}
+      >
         <h2 className="text-2xl font-semibold tracking-tight">Join the Drop</h2>
-        <p className="mt-2 text-zinc-600">
+        <p
+          className={`mt-2 text-zinc-600 transition-all duration-700 delay-100 ${
+            isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+          }`}
+        >
           Get first access to the Leroy Kelly Forever hat release…plus legacy
           updates.
         </p>
 
         <form
           onSubmit={onSubmit}
-          className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-center"
+          className={`mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-center transition-all duration-700 delay-200 ${
+            isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+          }`}
         >
           <input
             type="email"
@@ -80,7 +92,7 @@ export default function EmailCaptureSection() {
             autoComplete="email"
             required
             placeholder="Email address"
-            className="w-full sm:w-80 px-4 py-3 border border-zinc-200 rounded-xl shadow-inner focus:outline-none focus:ring-2 focus:ring-zinc-300 focus:shadow-md transition-shadow"
+            className="w-full sm:w-80 px-4 py-3 border border-zinc-200 rounded-xl shadow-inner focus:outline-none focus:ring-2 focus:ring-zinc-300 focus:shadow-md transition-all duration-200 hover:border-zinc-300"
           />
 
           <button

@@ -1,3 +1,5 @@
+import { useInView } from "../../hooks/useInView";
+
 const legacyHighlights = [
   { label: "Career Rushing Yards", value: <span>7,274</span> },
   { label: "Career Rushing TDs", value: <span>74</span> },
@@ -34,14 +36,25 @@ const marqueeItems = [
 export default function LegacyStatsSection() {
   // Duplicate items for seamless loop
   const loopItems = [...marqueeItems, ...marqueeItems];
+  const { ref, isInView } = useInView({ threshold: 0.2 });
 
   return (
-    <section className="bg-white py-10">
+    <section className="bg-white py-10" ref={ref}>
       <div className="mx-auto max-w-6xl px-6 text-center">
         {/* Stat cards */}
         <div className="mt-10 grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-5">
-          {legacyHighlights.map((stat) => (
-            <div key={stat.label} className="text-center">
+          {legacyHighlights.map((stat, idx) => (
+            <div
+              key={stat.label}
+              className={`text-center transition-all duration-500 hover:scale-105 hover:-translate-y-1 cursor-default ${
+                isInView
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-8"
+              }`}
+              style={{
+                transitionDelay: isInView ? `${idx * 100}ms` : "0ms",
+              }}
+            >
               <div className="text-5xl md:text-6xl font-medium tracking-tight text-zinc-900 drop-shadow-sm">
                 {stat.value}
               </div>

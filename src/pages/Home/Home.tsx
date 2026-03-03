@@ -1,10 +1,13 @@
 import { Link } from "react-router-dom";
 import { Button, MetaTags } from "../../components";
+import { useInView } from "../../hooks/useInView";
 import FooterSection from "../../sections/Footer";
 import HeroSection from "../../sections/HeroSection";
 import LegacyStatsSection from "../../sections/LegacyStatsSection";
 
 export default function Home() {
+  const { ref, isInView } = useInView({ threshold: 0.2 });
+
   return (
     <main className="bg-white text-zinc-900">
       <MetaTags
@@ -16,7 +19,14 @@ export default function Home() {
 
       <LegacyStatsSection />
 
-      <div className="bg-white px-6 py-10 text-center animate-slideUp">
+      <div
+        ref={ref}
+        className={`bg-white px-6 py-10 text-center transition-all duration-700 ${
+          isInView
+            ? "opacity-100 translate-y-0 scale-100"
+            : "opacity-0 translate-y-8 scale-95"
+        }`}
+      >
         <Link to="/drop">
           <Button variant="primary" size="lg">
             Secure Access
