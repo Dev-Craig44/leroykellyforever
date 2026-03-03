@@ -9,9 +9,10 @@ export default function HeroSection() {
         <img
           src="/logos/L_Kelly_logo_master_nosquare.png"
           alt="Leroy Kelly Forever"
-          className="mx-auto w-32 h-auto mb-8 opacity-90 animate-fadeIn drop-shadow-sm transition-transform duration-200"
+          className="mx-auto w-32 h-auto mb-8 opacity-90 animate-fadeIn drop-shadow-sm"
           style={{
             transform: `translateY(${scrollY * 0.15}px)`,
+            willChange: "transform",
           }}
         />
         <p className="text-xs tracking-[0.35em] uppercase text-zinc-400 animate-fadeIn">
