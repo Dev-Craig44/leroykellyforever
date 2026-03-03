@@ -19,7 +19,7 @@ export default function Home() {
       <div className="bg-white px-6 py-10 text-center animate-slideUp">
         <Link to="/drop">
           <Button variant="primary" size="lg">
-            View Edition I
+            Secure Access
             <span aria-hidden="true" className="ml-1">
               →
             </span>
