@@ -308,6 +308,29 @@ Set in Vercel dashboard:
 - `VITE_API_BASE_URL` - Backend API (default: https://api.leroykellyforever.com)
 - `VITE_SHOPIFY_VARIANT_ID` - Product variant for cart links
 
+### 🌐 Production Domain Configuration (2026-03)
+
+Connected the custom domain to Vercel production environment.
+
+#### DNS Changes
+
+- Root domain (`@`) → A record → `76.76.21.21` (Vercel)
+- `www` → CNAME → `cname.vercel-dns.com`
+- Removed legacy Squarespace A + CNAME records
+
+#### Redirect Strategy
+
+- Primary domain: `https://leroykellyforever.com`
+- `www.leroykellyforever.com` → 308 Permanent Redirect → root
+- `leroykellyforever.vercel.app` remains as fallback domain
+
+#### Result
+
+- First-party branded production domain
+- HTTPS/SSL issued by Vercel
+- Clean canonical routing
+- Ready for Shopify subdomain integration
+
 ---
 
 ## 🛠️ Local Development
