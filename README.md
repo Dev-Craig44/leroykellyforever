@@ -68,6 +68,79 @@ Edition I is part of a generational legacy initiative led by family.
 
 ---
 
+## 🏗 Shopify Infrastructure Split (Shop Subdomain Setup)
+
+### Architecture Decision
+
+We separated brand narrative and checkout infrastructure:
+
+- `www.leroykellyforever.com` → Vercel (Drop Page / Brand Experience)
+- `shop.leroykellyforever.com` → Shopify (Checkout + Cart Infrastructure)
+
+This prevents:
+- SEO authority splitting
+- Public browsing of Shopify storefront
+- Theme clutter interfering with drop positioning
+
+---
+
+### Shopify Home Page Conversion
+
+Converted Shopify homepage into a minimal logo-only portal.
+
+Implemented via:
+
+- Custom Liquid section
+- Full viewport flexbox centering
+- Removal of all theme sections (Hero, Collections, Footer blocks)
+- Removal of navigation and catalog elements
+
+Custom Liquid used:
+
+```html
+<style>
+  body, main, #MainContent { margin: 0 !important; padding: 0 !important; }
+</style>
+
+<div style="
+  height:100vh;
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#f5f5f3;
+">
+  <img 
+    src="https://cdn.shopify.com/s/files/1/0984/9343/2090/files/L_Kelly_logo_master_square_3.png?v=1772520495"
+    alt="Leroy Kelly Forever"
+    style="width:320px; max-width:80vw; height:auto;"
+  />
+</div>
+```
+
+Result:
+- True vertical centering
+- Zero Shopify layout bleed
+- Infrastructure-only storefront
+- Controlled drop environment
+
+### Strategic Intent
+
+Shopify now functions as:
+- Checkout engine
+- Cart permalink receiver
+- Discount application endpoint
+
+Vercel handles:
+- Brand narrative
+- Scarcity counter
+- Drop messaging
+- Email funnel
+
+This preserves brand control while leveraging Shopify's checkout reliability.
+
+---
+
 ## ✨ Features
 
 ### Reusable Component Library
