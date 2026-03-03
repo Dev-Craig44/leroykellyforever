@@ -794,6 +794,57 @@ Returns comprehensive inventory data including:
 
 Cached for 5 minutes.
 
+## Video Submission (User Stories)
+
+```bash
+POST /submit-video
+Content-Type: multipart/form-data
+```
+
+Accepts video submissions for "Give Leroy His Flowers" feature.
+
+**Request Body:**
+
+- `video` (file, required): Video file (MP4, MOV, WebM)
+- `name` (string, required): User's name
+- `email` (string, required): User's email
+- `message` (string, optional): Additional message about Leroy Kelly
+- `duration` (number): Video duration in seconds
+
+**Constraints:**
+
+- Video duration: 15-60 seconds (enforced client-side)
+- Max file size: 100MB
+- Allowed formats: MP4, MOV, WebM, AVI
+
+**Response:**
+
+```json
+{
+  "ok": true,
+  "message": "Video submitted successfully",
+  "submissionId": 1709516400000
+}
+```
+
+**Implementation Details (Droplet):**
+
+- **Package added:** `multer` (npm install multer)
+- **Storage:** `~/lk-api/uploads/videos/`
+- **Route file:** `routes/videoSubmission.js`
+- **Registered in:** `src/index.js`
+- **PM2 Status:** Restarted on 2026-03-03
+- **Logs:** Check with `pm2 logs lk-api`
+
+**TODO for Production:**
+
+1. Save submissions to database (currently logged to console)
+2. Send email notifications to admin
+3. Upload videos to cloud storage (S3/R2)
+4. Implement moderation/review queue
+5. Add rate limiting per email/IP
+6. Auto-delete old files after cloud upload
+
 ---
 
 # 🛠 Frontend Inventory Integration
