@@ -22,7 +22,7 @@ export default function HatVideoCardSection() {
           className="mx-auto max-w-xl animate-slideUp"
         >
           {/* Product Video */}
-          <div className="aspect-[9/11] w-full overflow-hidden rounded-2xl bg-zinc-900 relative">
+          <div className="aspect-[9/11] w-full overflow-hidden rounded-2xl bg-zinc-900 relative shadow-[inset_0_0_0_1px_rgba(255,255,255,0.1)]">
             <video
               autoPlay
               loop
@@ -52,7 +52,7 @@ export default function HatVideoCardSection() {
 
             {/* Edition Info */}
             <div className="flex items-center gap-2 text-sm">
-              <span className="inline-flex items-center px-3 py-1 rounded-full bg-zinc-100 text-zinc-700 font-medium text-xs">
+              <span className="inline-flex items-center px-3 py-1 rounded-full bg-zinc-100 text-zinc-700 font-medium text-xs shadow-sm">
                 Edition I
               </span>
               <span className="text-zinc-500 text-xs">•</span>

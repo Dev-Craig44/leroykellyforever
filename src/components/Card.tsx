@@ -17,8 +17,9 @@ export default function Card({
 }: CardProps) {
   const variants = {
     default: "border border-zinc-200 bg-zinc-50",
-    elevated: "border border-zinc-200 bg-white shadow-lg",
-    bordered: "border-2 border-zinc-900 bg-white",
+    elevated:
+      "border border-zinc-200 bg-white shadow-[0_4px_24px_-2px_rgba(0,0,0,0.08),0_2px_6px_-1px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_32px_-4px_rgba(0,0,0,0.12),0_4px_8px_-2px_rgba(0,0,0,0.06)]",
+    bordered: "border-2 border-zinc-900 bg-white shadow-sm",
   };
 
   const paddings = {

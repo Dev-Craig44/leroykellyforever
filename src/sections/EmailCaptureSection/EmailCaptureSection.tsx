@@ -80,13 +80,13 @@ export default function EmailCaptureSection() {
             autoComplete="email"
             required
             placeholder="Email address"
-            className="w-full sm:w-80 px-4 py-3 border border-zinc-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-zinc-300"
+            className="w-full sm:w-80 px-4 py-3 border border-zinc-200 rounded-xl shadow-inner focus:outline-none focus:ring-2 focus:ring-zinc-300 focus:shadow-md transition-shadow"
           />
 
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full sm:w-auto px-6 py-3 rounded-xl bg-black text-white font-semibold hover:bg-zinc-800 disabled:opacity-60 disabled:cursor-not-allowed"
+            className="w-full sm:w-auto px-6 py-3 rounded-xl bg-black text-white font-semibold hover:bg-zinc-800 shadow-sm hover:shadow-md transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed disabled:shadow-none disabled:transform-none"
           >
             {isLoading ? "Submitting…" : "Notify Me"}
           </button>

@@ -5,7 +5,7 @@ export default function SealSection() {
     <section className="bg-white animate-fadeIn">
       <div className="mx-auto max-w-6xl px-6 text-center">
         <div className="mt-4 flex flex-col items-center">
-          <div className="mt-6 w-full max-w-[280px] rounded-2xl border border-zinc-200 bg-white/60 px-6 py-6 shadow-sm transition-all duration-200 hover:shadow-md hover:-translate-y-1">
+          <div className="mt-6 w-full max-w-[280px] rounded-2xl border border-zinc-200 bg-white/80 backdrop-blur-sm px-6 py-6 shadow-[0_4px_16px_-4px_rgba(0,0,0,0.1)] transition-all duration-200 hover:shadow-[0_8px_24px_-6px_rgba(0,0,0,0.15)] hover:-translate-y-1">
             <p className="text-[10px] tracking-[0.35em] text-zinc-500 uppercase text-center">
               Official Legacy Release
             </p>

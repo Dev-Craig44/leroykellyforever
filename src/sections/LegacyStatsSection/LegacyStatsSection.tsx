@@ -42,7 +42,7 @@ export default function LegacyStatsSection() {
         <div className="mt-10 grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-5">
           {legacyHighlights.map((stat) => (
             <div key={stat.label} className="text-center">
-              <div className="text-5xl md:text-6xl font-medium tracking-tight text-zinc-900">
+              <div className="text-5xl md:text-6xl font-medium tracking-tight text-zinc-900 drop-shadow-sm">
                 {stat.value}
               </div>
               {stat.label !== "Pro Bowls" && stat.label !== "Hall of Fame" && (
@@ -55,7 +55,7 @@ export default function LegacyStatsSection() {
         </div>
 
         {/* Marquee...luxury version */}
-        <div className="mt-10 relative overflow-hidden border-y border-gray-100 bg-gradient-to-b from-white to-zinc-100">
+        <div className="mt-10 relative overflow-hidden border-y border-gray-100 bg-gradient-to-b from-white to-zinc-100 shadow-inner">
           {/* edge fades */}
           <div className="pointer-events-none absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-white to-transparent" />
           <div className="pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-white to-transparent" />

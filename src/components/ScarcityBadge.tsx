@@ -21,7 +21,7 @@ export default function ScarcityBadge({ className = "" }: ScarcityBadgeProps) {
     >
       <div className="flex items-baseline gap-2">
         <span
-          className={`text-5xl font-bold tracking-tight ${
+          className={`text-5xl font-bold tracking-tight drop-shadow-sm ${
             soldOut
               ? "text-red-600"
               : lowStock

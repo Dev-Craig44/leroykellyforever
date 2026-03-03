@@ -5,13 +5,13 @@ export default function HeroSection() {
         <img
           src="/logos/L_Kelly_logo_master_nosquare.png"
           alt="Leroy Kelly Forever"
-          className="mx-auto w-32 h-auto mb-8 opacity-90 animate-fadeIn"
+          className="mx-auto w-32 h-auto mb-8 opacity-90 animate-fadeIn drop-shadow-sm"
         />
         <p className="text-xs tracking-[0.35em] uppercase text-zinc-400 animate-fadeIn">
           Hall of Fame Legacy
         </p>
 
-        <h1 className="mt-6 text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-[1.05] tracking-tight animate-slideUp">
+        <h1 className="mt-6 text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-[1.05] tracking-tight animate-slideUp drop-shadow-sm">
           Leroy Kelly
           <span className="block text-zinc-500 font-extrabold opacity-80">
             Forever

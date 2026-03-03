@@ -25,14 +25,14 @@ export default function Drop() {
         <img
           src="/logos/L_Kelly_logo_master_nosquare.png"
           alt="Leroy Kelly Forever"
-          className="mx-auto w-32 h-auto mb-8 opacity-90"
+          className="mx-auto w-32 h-auto mb-8 opacity-90 drop-shadow-sm"
         />
 
         <p className="text-xs tracking-[0.35em] text-zinc-500 uppercase">
           Edition I
         </p>
 
-        <h1 className="mt-4 text-4xl font-extrabold tracking-tight">
+        <h1 className="mt-4 text-4xl font-extrabold tracking-tight drop-shadow-sm">
           The First 50
         </h1>
 
