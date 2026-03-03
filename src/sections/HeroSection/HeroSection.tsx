@@ -13,7 +13,7 @@ export default function HeroSection() {
 
         <h1 className="mt-6 text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-[1.05] tracking-tight animate-slideUp">
           Leroy Kelly
-          <span className="block text-zinc-300 font-extrabold opacity-80">
+          <span className="block text-zinc-500 font-extrabold opacity-80">
             Forever
           </span>
         </h1>
