@@ -1,4 +1,11 @@
 export default function FooterSection() {
+  const scrollToVideoSubmission = () => {
+    const element = document.querySelector('[data-section="video-submission"]');
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
   return (
     <footer className="border-t border-zinc-200 bg-white">
       <div className="mx-auto max-w-6xl px-6 py-14">
@@ -7,10 +14,19 @@ export default function FooterSection() {
             Leroy Kelly Forever
           </p>
 
-          <p className="text-sm text-zinc-600">
-            Want to give Leroy his flowers? Send a short story video (15–60s)
-            and we may feature it on Instagram.
-          </p>
+          <div className="space-y-3">
+            <p className="text-sm text-zinc-600">
+              Want to give Leroy his flowers? Send a short story video (15–60s)
+              and we may feature it on Instagram.
+            </p>
+            <button
+              onClick={scrollToVideoSubmission}
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-zinc-900 text-white text-sm font-semibold hover:bg-zinc-800 shadow-sm hover:shadow-md transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.98]"
+            >
+              Submit Your Video
+              <span aria-hidden="true">↑</span>
+            </button>
+          </div>
 
           <div className="mx-auto max-w-md rounded-2xl border border-zinc-200 bg-zinc-50 px-6 py-5">
             <p className="text-[11px] tracking-[0.35em] uppercase text-zinc-500">
