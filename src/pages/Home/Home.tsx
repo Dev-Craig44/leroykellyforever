@@ -4,7 +4,6 @@ import { useInView } from "../../hooks/useInView";
 import FooterSection from "../../sections/Footer";
 import HeroSection from "../../sections/HeroSection";
 import LegacyStatsSection from "../../sections/LegacyStatsSection";
-import VideoSubmissionSection from "../../sections/VideoSubmissionSection";
 
 export default function Home() {
   const { ref, isInView } = useInView({ threshold: 0.2 });
@@ -37,8 +36,6 @@ export default function Home() {
           </Button>
         </Link>
       </div>
-
-      <VideoSubmissionSection />
 
       <FooterSection />
     </main>

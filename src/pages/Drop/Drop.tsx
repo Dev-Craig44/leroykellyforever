@@ -5,7 +5,6 @@ import FooterSection from "../../sections/Footer";
 import HatVideoCardSection from "../../sections/HatVideoCardSection";
 import LegacyStatsSection from "../../sections/LegacyStatsSection";
 import SealSection from "../../sections/SealSection";
-import VideoSubmissionSection from "../../sections/VideoSubmissionSection";
 
 export default function Drop() {
   const { available, loading } = useInventory({
@@ -73,7 +72,6 @@ export default function Drop() {
       <LegacyStatsSection />
       <EmailCaptureSection />
       <SealSection />
-      <VideoSubmissionSection />
       <FooterSection />
     </main>
   );

@@ -140,25 +140,13 @@ export default function VideoSubmissionSection() {
     <section
       ref={ref}
       data-section="video-submission"
-      className="bg-gradient-to-b from-white to-zinc-50 py-20 px-6"
+      className="bg-gradient-to-b from-white to-zinc-50 py-12 px-6"
     >
       <div
         className={`mx-auto max-w-2xl transition-all duration-700 ${
           isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
         }`}
       >
-        <div className="text-center mb-10">
-          <h2 className="text-3xl font-bold tracking-tight text-zinc-900">
-            Give Leroy His Flowers
-          </h2>
-          <p className="mt-3 text-lg text-zinc-600">
-            Share your story about Leroy Kelly's legacy
-          </p>
-          <p className="mt-2 text-sm text-zinc-500">
-            Submit a 15-60 second video and we may feature it on Instagram
-          </p>
-        </div>
-
         <form
           onSubmit={handleSubmit}
           className="space-y-6 bg-white rounded-2xl border border-zinc-200 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.1)] px-6 sm:px-8 py-8"
