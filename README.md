@@ -78,6 +78,7 @@ We separated brand narrative and checkout infrastructure:
 - `shop.leroykellyforever.com` → Shopify (Checkout + Cart Infrastructure)
 
 This prevents:
+
 - SEO authority splitting
 - Public browsing of Shopify storefront
 - Theme clutter interfering with drop positioning
@@ -99,18 +100,25 @@ Custom Liquid used:
 
 ```html
 <style>
-  body, main, #MainContent { margin: 0 !important; padding: 0 !important; }
+  body,
+  main,
+  #MainContent {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
 </style>
 
-<div style="
+<div
+  style="
   height:100vh;
   width:100%;
   display:flex;
   align-items:center;
   justify-content:center;
   background:#f5f5f3;
-">
-  <img 
+"
+>
+  <img
     src="https://cdn.shopify.com/s/files/1/0984/9343/2090/files/L_Kelly_logo_master_square_3.png?v=1772520495"
     alt="Leroy Kelly Forever"
     style="width:320px; max-width:80vw; height:auto;"
@@ -119,6 +127,7 @@ Custom Liquid used:
 ```
 
 Result:
+
 - True vertical centering
 - Zero Shopify layout bleed
 - Infrastructure-only storefront
@@ -127,17 +136,40 @@ Result:
 ### Strategic Intent
 
 Shopify now functions as:
+
 - Checkout engine
 - Cart permalink receiver
 - Discount application endpoint
 
 Vercel handles:
+
 - Brand narrative
 - Scarcity counter
 - Drop messaging
 - Email funnel
 
 This preserves brand control while leveraging Shopify's checkout reliability.
+
+---
+
+## Shopify Gateway Architecture (March 2026)
+
+Shopify (shop.leroykellyforever.com) is configured as a permanent allocation portal.
+
+Instead of acting as a traditional storefront, the Shopify homepage uses a Custom Liquid section that:
+
+- Displays the official Leroy Kelly Forever logo
+- Shows "Allocation access required"
+- Routes users to https://leroykellyforever.com
+- Removes all theme navigation and product listings
+
+This keeps:
+
+Vercel → Brand / Story / Drop Experience  
+Shopify → Checkout Infrastructure Only
+
+All product discovery and scarcity logic lives in the React web app.
+Shopify functions strictly as payment and fulfillment layer.
 
 ---
 
