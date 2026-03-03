@@ -189,6 +189,31 @@ The following discount codes are scheduled in Shopify for Phase 1 allocation:
 
 ---
 
+## Phase 1 Contacts (Imported)
+
+**Total contacts:** 5  
+**Email subscribers:** 5  
+**Platform:** Wix Contacts
+
+| Email                            | First Name | Club/Affiliation  |
+| -------------------------------- | ---------- | ----------------- |
+| agentfresh37@yahoo.com           | -          | Cleveland Heights |
+| dreich1218@hotmail.com           | David      | -                 |
+| amsteljacob@gmail.com            | Jacob      | -                 |
+| scottnunnari@gmail.com           | Scott      | -                 |
+| hingetownbrownsbackers@gmail.com | -          | Hingetown         |
+
+**Import Date:** March 2, 2026
+
+**Purpose:**
+
+- Phase 1 allocation audience
+- Direct outreach for Presidents Window
+- Club leadership + key supporters
+- Foundation for Backers Legacy Index tracking
+
+---
+
 # 🌐 Production Infrastructure
 
 ## Frontend
