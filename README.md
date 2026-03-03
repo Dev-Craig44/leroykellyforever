@@ -214,6 +214,81 @@ The following discount codes are scheduled in Shopify for Phase 1 allocation:
 
 ---
 
+## 📧 Edition I – Backers Club Allocation System (Wave 1)
+
+### Overview
+
+Implemented controlled email-based allocation system for Edition I (First 50) release.
+
+Five Browns Backers club presidents selected for Wave 1 private allocation.
+
+### Infrastructure Built
+
+- Created Mailchimp audience: Backers Presidents – Edition I Wave 1
+- Added merge fields:
+  - FNAME
+  - CLUB
+  - CODE
+  - WAVE
+- Imported club president contacts with structured CSV
+- Tagged contacts with: Backers-Wave1
+
+### Dynamic Discount Routing
+
+Configured Shopify cart link with merge-tag-based dynamic discount:
+
+```
+/discount/*|CODE|*?redirect=/cart/51769012748570:1
+```
+
+Each president receives:
+
+- Unique discount code
+- Preloaded cart (variant ID 51769012748570)
+- Auto-applied discount
+- Club-specific UTM tracking
+- Wave tracking via WAVE field
+
+Verified:
+
+- Discount applies correctly when active
+- Cart loads correct product
+- Merge tags resolve properly
+- UTM parameters persist
+- End-to-end test successful
+
+### Strategic Release Plan
+
+Wave 1:
+
+- 5 club presidents
+- Controlled release
+- Scheduled for Tuesday launch
+- 72-hour allocation window
+
+No public promotion during Wave 1.
+Backers clubs receive priority before broader Facebook/Instagram promotion.
+
+### Positioning
+
+This is not a promotional blast.
+This is controlled allocation infrastructure.
+
+Email tone:
+Leadership-level.
+Ceremonial.
+Non-hype.
+Scalable.
+
+System now supports:
+
+- Future waves
+- Per-club tracking
+- NFT tie-ins
+- Data-driven allocation scaling
+
+---
+
 # 🌐 Production Infrastructure
 
 ## Frontend
