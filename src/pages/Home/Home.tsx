@@ -16,7 +16,7 @@ export default function Home() {
 
       <LegacyStatsSection />
 
-      <div className="px-6 py-16 text-center animate-slideUp">
+      <div className="bg-white px-6 py-10 text-center animate-slideUp">
         <Link to="/drop">
           <Button variant="primary" size="lg">
             View Edition I

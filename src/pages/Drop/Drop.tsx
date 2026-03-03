@@ -21,7 +21,7 @@ export default function Drop() {
         path="/drop"
       />
 
-      <section className="px-6 pt-20 pb-10 text-center animate-fadeIn">
+      <section className="bg-white px-6 pt-20 pb-10 text-center animate-fadeIn">
         <img
           src="/logos/L_Kelly_logo_master_nosquare.png"
           alt="Leroy Kelly Forever"

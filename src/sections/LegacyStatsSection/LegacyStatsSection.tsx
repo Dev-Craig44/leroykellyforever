@@ -7,7 +7,7 @@ const legacyHighlights = [
     value: (
       <span className="leading-[0.95]">
         <span className="block">1994</span>
-        <span className="block text-[0.72em] tracking-[0.1em]">
+        <span className="block text-[0.48em] tracking-[0.35em]">
           HALL OF FAME
         </span>
       </span>
@@ -18,7 +18,7 @@ const legacyHighlights = [
     value: (
       <span className="leading-[0.95]">
         <span className="block">6</span>
-        <span className="block text-[0.6em] tracking-[0.20em]">PRO BOWLS</span>
+        <span className="block text-[0.48em] tracking-[0.35em]">PRO BOWLS</span>
       </span>
     ),
   },
@@ -36,12 +36,12 @@ export default function LegacyStatsSection() {
   const loopItems = [...marqueeItems, ...marqueeItems];
 
   return (
-    <section className="bg-white py-28">
+    <section className="bg-white py-10">
       <div className="mx-auto max-w-6xl px-6 text-center">
         {/* Stat cards */}
         <div className="mt-10 grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-5">
           {legacyHighlights.map((stat) => (
-            <div key={stat.label} className="text-left">
+            <div key={stat.label} className="text-center">
               <div className="text-5xl md:text-6xl font-medium tracking-tight text-zinc-900">
                 {stat.value}
               </div>
@@ -55,15 +55,15 @@ export default function LegacyStatsSection() {
         </div>
 
         {/* Marquee...luxury version */}
-        <div className="mt-10 relative overflow-hidden border-y border-gray-100 bg-white">
+        <div className="mt-10 relative overflow-hidden border-y border-gray-100 bg-gradient-to-b from-white to-zinc-100">
           {/* edge fades */}
           <div className="pointer-events-none absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-white to-transparent" />
           <div className="pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-white to-transparent" />
 
-          <div className="flex w-max items-center gap-10 px-6 py-6 animate-marquee whitespace-nowrap motion-reduce:animate-none">
-            {[...marqueeItems, ...marqueeItems].map((item, idx) => (
+          <div className="flex w-max items-center gap-8 px-6 py-6 animate-marquee whitespace-nowrap motion-reduce:animate-none">
+            {loopItems.map((item, idx) => (
               <div key={`${item}-${idx}`} className="flex items-center gap-6">
-                <span className="text-[11px] tracking-[0.22em] uppercase text-gray-800">
+                <span className="text-[16px] tracking-[0.22em] uppercase text-gray-800">
                   {item}
                 </span>
                 {/* hairline divider */}

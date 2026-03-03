@@ -61,7 +61,7 @@ export default function EmailCaptureSection() {
   const isLoading = status === "loading";
 
   return (
-    <section id="email-capture" className="bg-white py-20 px-6">
+    <section id="email-capture" className="bg-zinc-50 py-20 px-6">
       <div className="text-center">
         <h2 className="text-2xl font-semibold tracking-tight">Join the Drop</h2>
         <p className="mt-2 text-zinc-600">

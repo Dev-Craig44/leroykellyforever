@@ -7,7 +7,7 @@ export default function HatVideoCardSection() {
     "https://3u8jjdepw0t4gs3x-98493432090.shopifypreview.com/cart/YOUR_VARIANT_ID:1?discount=BACKERS50";
 
   return (
-    <section className="bg-white">
+    <section className="bg-zinc-50">
       <div className="mx-auto max-w-6xl px-6 py-16">
         {/* Scarcity Block */}
         <div className="mx-auto max-w-xl text-center mb-12 animate-fadeIn">
