@@ -140,7 +140,7 @@ export default function VideoSubmissionSection() {
     <section
       ref={ref}
       data-section="video-submission"
-      className="bg-gradient-to-b from-white to-zinc-50 py-12 px-6"
+      className="bg-gradient-to-b from-white to-zinc-50 py-16 px-6"
     >
       <div
         className={`mx-auto max-w-2xl transition-all duration-700 ${
