@@ -836,8 +836,11 @@ Accepts video submissions for "Give Leroy His Flowers" feature.
 - **Model:** `models/VideoSubmission.js`
 - **DB Connection:** `src/db.js`
 - **PM2 Status:** Restarted on 2026-03-04
-- **CORS Fixed:** Removed duplicate imports, configured origins
-- **MongoDB Fixed:**  
+- **CORS Fixed:** 
+  - Removed duplicate imports, configured origins
+  - Added error handling middleware to ensure CORS headers on ALL responses (including errors)
+  - Verified: CORS headers now present on 400/500 errors ✅
+- **MongoDB Fixed:**
   - Credentials: Craigvulcan:TestPass123 (rotated from special chars password)
   - Updated in both `.env` AND `~/.bashrc` (shell env overrides .env!)
   - Connection verified ✅
