@@ -829,21 +829,133 @@ Accepts video submissions for "Give Leroy His Flowers" feature.
 
 **Implementation Details (Droplet):**
 
-- **Package added:** `multer` (npm install multer)
-- **Storage:** `~/lk-api/uploads/videos/`
-- **Route file:** `routes/videoSubmission.js`
-- **Registered in:** `src/index.js`
+- **Packages:** `multer`, `mongoose`
+- **Video Storage:** `~/lk-api/uploads/videos/`
+- **Database:** MongoDB (Atlas or local)
+- **Routes:** `routes/videoSubmission.js`, `routes/admin.js`
+- **Model:** `models/VideoSubmission.js`
+- **DB Connection:** `src/db.js`
 - **PM2 Status:** Restarted on 2026-03-03
-- **Logs:** Check with `pm2 logs lk-api`
+
+**Database Schema:**
+
+```javascript
+{
+  name: String,           // Submitter name
+  email: String,          // Submitter email (indexed)
+  message: String,        // Optional message about Leroy
+  videoFilename: String,  // Video filename on disk
+  videoPath: String,      // Full path to video
+  duration: Number,       // Video duration in seconds
+  status: String,         // pending | approved | rejected | featured
+  instagramUrl: String,   // URL when posted to Instagram
+  submittedAt: Date,      // Submission timestamp
+  reviewedAt: Date,       // Review timestamp
+  notes: String          // Admin notes
+}
+```
+
+**Setup MongoDB Atlas:**
+
+1. Create free cluster at [mongodb.com/atlas](https://www.mongodb.com/cloud/atlas)
+2. Get connection string (looks like: `mongodb+srv://username:password@cluster.mongodb.net/lk-forever`)
+3. Add to droplet: `export MONGODB_URI="your-connection-string"`
+4. Restart PM2: `pm2 restart lk-api --update-env`
+
+**Alternative: Local MongoDB on Droplet:**
+
+```bash
+# Connect to localhost (default if MONGODB_URI not set)
+mongodb://localhost:27017/lk-forever
+```
 
 **TODO for Production:**
 
-1. Save submissions to database (currently logged to console)
-2. Send email notifications to admin
-3. Upload videos to cloud storage (S3/R2)
-4. Implement moderation/review queue
+1. ✅ ~~Save submissions to database~~ (MongoDB integrated)
+2. ✅ ~~Implement moderation/review queue~~ (Admin endpoints created)
+3. Send email notifications to admin
+4. Upload videos to cloud storage (S3/R2)
 5. Add rate limiting per email/IP
 6. Auto-delete old files after cloud upload
+7. Add authentication to admin endpoints
+
+## Admin Video Management
+
+**Get All Submissions**
+
+```bash
+GET /admin/submissions?status=pending&limit=50&skip=0
+```
+
+Returns paginated list of video submissions with optional status filter.
+
+**Response:**
+
+```json
+{
+  "ok": true,
+  "submissions": [
+    {
+      "_id": "507f1f77bcf86cd799439011",
+      "name": "John Doe",
+      "email": "john@example.com",
+      "message": "Leroy Kelly inspired my childhood...",
+      "videoFilename": "1709516400000-video.mp4",
+      "videoPath": "uploads/videos/1709516400000-video.mp4",
+      "duration": 45,
+      "status": "pending",
+      "submittedAt": "2026-03-03T12:00:00.000Z",
+      "createdAt": "2026-03-03T12:00:00.000Z",
+      "updatedAt": "2026-03-03T12:00:00.000Z"
+    }
+  ],
+  "total": 125,
+  "limit": 50,
+  "skip": 0
+}
+```
+
+**Get Single Submission**
+
+```bash
+GET /admin/submissions/:id
+```
+
+**Update Submission Status**
+
+```bash
+PATCH /admin/submissions/:id
+Content-Type: application/json
+
+{
+  "status": "approved",
+  "instagramUrl": "https://instagram.com/p/abc123",
+  "notes": "Great story, posted on 3/15"
+}
+```
+
+**Get Submission Stats**
+
+```bash
+GET /admin/stats
+```
+
+Returns count of submissions by status.
+
+**Response:**
+
+```json
+{
+  "ok": true,
+  "total": 125,
+  "byStatus": {
+    "pending": 78,
+    "approved": 32,
+    "featured": 10,
+    "rejected": 5
+  }
+}
+```
 
 ---
 
