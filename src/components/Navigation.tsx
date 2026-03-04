@@ -55,6 +55,16 @@ export default function Navigation() {
           >
             Share Story
           </Link>
+          <Link
+            to="/admin"
+            className={`font-medium transition-colors hover:text-zinc-900 ${
+              isActive("/admin")
+                ? "text-zinc-900 border-b-2 border-zinc-900 pb-1"
+                : "text-zinc-600"
+            }`}
+          >
+            Admin
+          </Link>
         </div>
       </div>
     </nav>
