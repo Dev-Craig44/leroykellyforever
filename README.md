@@ -840,6 +840,10 @@ Accepts video submissions for "Give Leroy His Flowers" feature.
   - Removed duplicate imports, configured origins
   - Added error handling middleware to ensure CORS headers on ALL responses (including errors)
   - Verified: CORS headers now present on 400/500 errors ✅
+- **Nginx Upload Limit:** 
+  - Added `client_max_body_size 100m;` to `/etc/nginx/sites-available/lk-api`
+  - Fixes 413 Content Too Large error for video uploads
+  - Nginx reloaded successfully ✅
 - **MongoDB Fixed:**
   - Credentials: Craigvulcan:TestPass123 (rotated from special chars password)
   - Updated in both `.env` AND `~/.bashrc` (shell env overrides .env!)
