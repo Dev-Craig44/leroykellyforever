@@ -2,10 +2,8 @@ import { Button, Card, ScarcityBadge } from "../../components";
 import { useInView } from "../../hooks/useInView";
 
 export default function HatVideoCardSection() {
-  // Phase 2: Replace with actual Shopify variant ID
-  // const VARIANT_ID = "YOUR_VARIANT_ID_HERE";
-  const SHOPIFY_CART_URL =
-    "https://3u8jjdepw0t4gs3x-98493432090.shopifypreview.com/cart/YOUR_VARIANT_ID:1?discount=BACKERS50";
+  const SHOPIFY_PRODUCT_URL =
+    "https://shop.leroykellyforever.com/products/leroy-kelly-forever-hat-edition-i";
 
   const { ref, isInView } = useInView({ threshold: 0.1 });
 
@@ -72,7 +70,7 @@ export default function HatVideoCardSection() {
             <Button
               variant="primary"
               size="lg"
-              href={SHOPIFY_CART_URL}
+              href={SHOPIFY_PRODUCT_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="w-full"
