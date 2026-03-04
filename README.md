@@ -53,9 +53,12 @@ Edition I is part of a generational legacy initiative led by family.
 ## Backend (API Layer)
 
 - **Node.js** (NVM-managed)
-- **Express** - REST API framework
+- **Express** - REST API framework with ES modules
+- **MongoDB Atlas** - Cloud database for video submissions
+- **Mongoose** - ODM for MongoDB
+- **Multer** - Multipart file upload handling
 - **PM2** - Process manager for zero-downtime restarts
-- **Nginx** - Reverse proxy
+- **Nginx** - Reverse proxy with 100MB upload limit
 - **Let's Encrypt SSL** - Via Certbot
 - **Hosted on DigitalOcean Droplet**
 - **Domain**: api.leroykellyforever.com
@@ -887,12 +890,12 @@ mongodb://localhost:27017/lk-forever
 **TODO for Production:**
 
 1. ✅ ~~Save submissions to database~~ (MongoDB integrated)
-2. ✅ ~~Implement moderation/review queue~~ (Admin endpoints created)
-3. Send email notifications to admin
-4. Upload videos to cloud storage (S3/R2)
-5. Add rate limiting per email/IP
-6. Auto-delete old files after cloud upload
-7. Add authentication to admin endpoints
+2. ✅ ~~Implement moderation/review queue~~ (Admin dashboard created)
+3. ✅ ~~Add authentication to admin endpoints~~ (Password-protected login implemented)
+4. Send email notifications to admin
+5. Upload videos to cloud storage (S3/R2)
+6. Add rate limiting per email/IP
+7. Auto-delete old files after cloud upload
 
 ## Admin Video Management
 
@@ -971,6 +974,79 @@ Returns count of submissions by status.
   }
 }
 ```
+
+## Admin Dashboard UI
+
+**Location:** `/admin` (password protected)
+
+Full-featured web dashboard for reviewing and managing video submissions.
+
+**Features:**
+
+- 📹 **Video Previews** - Watch submissions directly in browser with playback controls
+- 🏷️ **Status Filtering** - View all, pending, approved, featured, or rejected submissions
+- ✅ **Quick Actions** - Approve, reject, or feature videos with one click
+- 📊 **Submission Details** - View name, email, message, duration, and submission date
+- 🎨 **Color-Coded Badges** - Visual status indicators (amber/green/purple/red)
+- 🔄 **Status Transitions** - Move videos between states (pending → approved → featured, etc.)
+- 🚪 **Logout Button** - Clear authentication session
+
+**Admin Routes:**
+
+- `/admin/login` - Password-protected login page
+- `/admin` - Dashboard (auto-redirects to login if not authenticated)
+
+**Screenshots locations:**
+- Filter bar with 5 status buttons
+- Grid layout with video cards (3 columns on desktop)
+- Each card shows video preview, submitter info, and action buttons
+
+## Admin Authentication
+
+**Security Implementation:**
+
+- 🔐 **Password Protection** - Required to access admin dashboard
+- 🔑 **Environment Variable** - Password stored in `VITE_ADMIN_PASSWORD` env var
+- 💾 **Session Storage** - Auth token cleared when browser closes
+- 🚫 **Auto-Redirect** - Unauthorized users sent to login page
+- 🔒 **Hidden Navigation** - Admin link only visible when authenticated
+- 🚪 **Logout Function** - Manual session termination available
+
+**Setup:**
+
+1. Create `.env.local` in project root:
+   ```bash
+   VITE_ADMIN_PASSWORD=YourSecurePassword123!
+   ```
+
+2. Access admin at `/admin` (redirects to `/admin/login`)
+
+3. Enter password to authenticate
+
+**Production Deployment (Vercel):**
+
+Add environment variable in Vercel dashboard:
+- **Name:** `VITE_ADMIN_PASSWORD`
+- **Value:** Your secure password
+
+**Default Password (Development):**
+```
+LeroyKelly2026!
+```
+
+**Security Notes:**
+
+- Session-based authentication (not persistent across browser restarts)
+- `.env.local` automatically ignored by git (via `*.local` in `.gitignore`)
+- Password never committed to repository
+- Frontend validation only - consider backend auth middleware for production
+
+**Future Enhancements:**
+
+- IP allowlist (restrict to specific IPs)
+- Google OAuth integration
+- Multi-factor authentication (MFA)
+- Role-based access control (RBAC)
 
 ---
 
@@ -1100,9 +1176,12 @@ src/
 │   ├── Button.tsx
 │   ├── Card.tsx
 │   ├── ScarcityBadge.tsx
+│   ├── Navigation.tsx   # Header navigation with auth-aware admin link
 │   └── MetaTags.tsx
 ├── hooks/              # Custom React hooks
-│   └── useInventory.ts # Shopify inventory API integration
+│   ├── useInventory.ts # Shopify inventory API integration
+│   ├── useInView.ts    # Intersection Observer for scroll animations
+│   └── useScrollPosition.ts # Optimized scroll tracking
 ├── lib/                # Utility libraries
 │   └── api.ts         # API client with TypeScript types
 ├── pages/              # Route-level pages
@@ -1110,10 +1189,17 @@ src/
 │   │   └── Home.tsx    # Landing page
 │   ├── Drop/
 │   │   └── Drop.tsx    # Product allocation page
+│   ├── SubmitVideo/
+│   │   └── SubmitVideo.tsx # Video submission page
+│   ├── Admin/
+│   │   └── Admin.tsx   # Password-protected admin dashboard
+│   ├── AdminLogin/
+│   │   └── AdminLogin.tsx # Admin authentication
 │   └── DevInventory/   # Development inventory dashboard
 ├── sections/           # Page section components
 │   ├── HeroSection/
 │   ├── HatVideoCardSection/
+│   ├── VideoSubmissionSection/  # Video upload form
 │   ├── EmailCaptureSection/
 │   ├── LegacyStatsSection/
 │   ├── CtaSection/
@@ -1159,12 +1245,15 @@ Modular, extensible, open-for-extension architecture.
 
 ## Phase 1 (Complete)
 
-- Drop page
-- Cart link integration
-- Real-time inventory
-- Production API
-- SSL infrastructure
-- Discount allocation engine
+- ✅ Drop page with real-time inventory
+- ✅ Cart link integration with Shopify
+- ✅ Production API on DigitalOcean
+- ✅ SSL infrastructure (Let's Encrypt)
+- ✅ Discount allocation engine
+- ✅ Email capture with Mailchimp
+- ✅ Video submission system with MongoDB
+- ✅ Admin dashboard with authentication
+- ✅ Video review and approval workflow
 
 ## Phase 2
 
