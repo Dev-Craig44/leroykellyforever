@@ -829,13 +829,14 @@ Accepts video submissions for "Give Leroy His Flowers" feature.
 
 **Implementation Details (Droplet):**
 
-- **Packages:** `multer`, `mongoose`
+- **Packages:** `multer`, `mongoose`, `cors`
 - **Video Storage:** `~/lk-api/uploads/videos/`
 - **Database:** MongoDB (Atlas or local)
 - **Routes:** `routes/videoSubmission.js`, `routes/admin.js`
 - **Model:** `models/VideoSubmission.js`
 - **DB Connection:** `src/db.js`
-- **PM2 Status:** Restarted on 2026-03-03
+- **PM2 Status:** Restarted on 2026-03-04
+- **CORS Fixed:** Removed duplicate imports, configured origins
 
 **Database Schema:**
 
