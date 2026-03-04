@@ -1,9 +1,9 @@
 import { Navigate, Route, Routes } from "react-router-dom";
+import Admin from "./pages/Admin/Admin";
+import AdminLogin from "./pages/AdminLogin/AdminLogin";
 import Drop from "./pages/Drop/Drop";
 import Home from "./pages/Home/Home";
 import SubmitVideo from "./pages/SubmitVideo/SubmitVideo";
-import Admin from "./pages/Admin/Admin";
-import AdminLogin from "./pages/AdminLogin/AdminLogin";
 
 export default function App() {
   return (

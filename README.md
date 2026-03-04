@@ -839,11 +839,11 @@ Accepts video submissions for "Give Leroy His Flowers" feature.
 - **Model:** `models/VideoSubmission.js`
 - **DB Connection:** `src/db.js`
 - **PM2 Status:** Restarted on 2026-03-04
-- **CORS Fixed:** 
+- **CORS Fixed:**
   - Removed duplicate imports, configured origins
   - Added error handling middleware to ensure CORS headers on ALL responses (including errors)
   - Verified: CORS headers now present on 400/500 errors ✅
-- **Nginx Upload Limit:** 
+- **Nginx Upload Limit:**
   - Added `client_max_body_size 100m;` to `/etc/nginx/sites-available/lk-api`
   - Fixes 413 Content Too Large error for video uploads
   - Nginx reloaded successfully ✅
@@ -997,6 +997,7 @@ Full-featured web dashboard for reviewing and managing video submissions.
 - `/admin` - Dashboard (auto-redirects to login if not authenticated)
 
 **Screenshots locations:**
+
 - Filter bar with 5 status buttons
 - Grid layout with video cards (3 columns on desktop)
 - Each card shows video preview, submitter info, and action buttons
@@ -1015,6 +1016,7 @@ Full-featured web dashboard for reviewing and managing video submissions.
 **Setup:**
 
 1. Create `.env.local` in project root:
+
    ```bash
    VITE_ADMIN_PASSWORD=YourSecurePassword123!
    ```
@@ -1026,10 +1028,12 @@ Full-featured web dashboard for reviewing and managing video submissions.
 **Production Deployment (Vercel):**
 
 Add environment variable in Vercel dashboard:
+
 - **Name:** `VITE_ADMIN_PASSWORD`
 - **Value:** Your secure password
 
 **Default Password (Development):**
+
 ```
 LeroyKelly2026!
 ```

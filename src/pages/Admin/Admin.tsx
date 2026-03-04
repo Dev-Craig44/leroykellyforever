@@ -26,8 +26,7 @@ export default function Admin() {
   const [filter, setFilter] = useState<string>("all");
 
   const API_BASE =
-    import.meta.env.VITE_API_BASE_URL ||
-    "https://api.leroykellyforever.com";
+    import.meta.env.VITE_API_BASE_URL || "https://api.leroykellyforever.com";
 
   // Check authentication
   useEffect(() => {

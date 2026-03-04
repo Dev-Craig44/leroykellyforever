@@ -8,10 +8,10 @@ export default function AdminLogin() {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     // Check password against environment variable
     const correctPassword = import.meta.env.VITE_ADMIN_PASSWORD || "admin123";
-    
+
     if (password === correctPassword) {
       // Store in sessionStorage (cleared when browser closes)
       sessionStorage.setItem("adminAuth", "true");
@@ -31,9 +31,7 @@ export default function AdminLogin() {
             alt="Leroy Kelly Forever"
             className="w-16 h-auto mx-auto mb-4 opacity-90"
           />
-          <h1 className="text-3xl font-bold text-zinc-900 mb-2">
-            Admin Login
-          </h1>
+          <h1 className="text-3xl font-bold text-zinc-900 mb-2">Admin Login</h1>
           <p className="text-zinc-600">
             Enter password to access video submissions
           </p>
