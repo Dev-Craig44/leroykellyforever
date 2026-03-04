@@ -90,8 +90,8 @@ export default function VideoSubmissionSection() {
       return;
     }
 
-    if (!formData.name.trim() || !formData.email.trim()) {
-      setErrorMessage("Please fill in all required fields");
+    if (!formData.name.trim()) {
+      setErrorMessage("Please enter your name");
       setStatus("error");
       return;
     }
