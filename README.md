@@ -837,8 +837,13 @@ Accepts video submissions for "Give Leroy His Flowers" feature.
 - **DB Connection:** `src/db.js`
 - **PM2 Status:** Restarted on 2026-03-04
 - **CORS Fixed:** Removed duplicate imports, configured origins
-- **MongoDB Credentials:** Fixed authentication (2026-03-04), connection verified ✅
+- **MongoDB Fixed:**  
+  - Credentials: Craigvulcan:TestPass123 (rotated from special chars password)
+  - Updated in both `.env` AND `~/.bashrc` (shell env overrides .env!)
+  - Connection verified ✅
+  - Video submission endpoint working (returns proper errors, connects to DB)
 - **Environment:** `.env` file with `MONGODB_URI`, loaded via `dotenv/config` in index.js
+- **Important:** Shell env vars in `~/.bashrc` override `.env` - keep both in sync!
 
 **Database Schema:**
 
