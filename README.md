@@ -829,14 +829,16 @@ Accepts video submissions for "Give Leroy His Flowers" feature.
 
 **Implementation Details (Droplet):**
 
-- **Packages:** `multer`, `mongoose`, `cors`
+- **Packages:** `multer`, `mongoose`, `cors`, `dotenv`
 - **Video Storage:** `~/lk-api/uploads/videos/`
-- **Database:** MongoDB (Atlas or local)
+- **Database:** MongoDB Atlas (lk-cluster.9pdzorp.mongodb.net)
 - **Routes:** `routes/videoSubmission.js`, `routes/admin.js`
 - **Model:** `models/VideoSubmission.js`
 - **DB Connection:** `src/db.js`
 - **PM2 Status:** Restarted on 2026-03-04
 - **CORS Fixed:** Removed duplicate imports, configured origins
+- **MongoDB Credentials:** Fixed authentication (2026-03-04), connection verified ✅
+- **Environment:** `.env` file with `MONGODB_URI`, loaded via `dotenv/config` in index.js
 
 **Database Schema:**
 
