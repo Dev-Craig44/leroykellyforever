@@ -176,6 +176,47 @@ Shopify functions strictly as payment and fulfillment layer.
 
 ---
 
+## 🛍️ Product Page Styling (Edition I)
+
+The Shopify product page has been transformed from a standard e-commerce template into a collector-style release page that aligns with the museum aesthetic.
+
+### Custom Enhancements
+
+**Dynamic Inventory Banner**
+- Custom Liquid section displaying real-time stock count
+- `{{ product.selected_or_first_available_variant.inventory_quantity }}` integration
+- Orange accent (#f97316) for scarcity emphasis
+- Gradient background matching brand colors
+
+**Custom CSS Styling** (`base.css`)
+- Museum-quality typography (2rem titles, -0.02em letter spacing)
+- Black rounded buttons with hover transforms
+- Cleaner product descriptions (0.95rem, 1.7 line-height)
+- 12px border radius on all interactive elements
+- Centered layout with breathing room
+
+**Legacy Storytelling Block**
+- Hall of Fame credentials prominently displayed
+- Career stats (7,274 yards, 2× Rushing Leader)
+- Multi-generational photos (Leroy Kelly + young fan)
+- "Ships within 48 hours" trust signal
+
+**Tribute Submission Funnel**
+- Product description includes CTA to submit tribute videos
+- Links to `leroykellyforever.com/submit-video`
+- Separates commerce (checkout) from community participation (video submissions)
+- Reinforces legacy narrative beyond product purchase
+
+### Architecture Decision
+
+**Product page now serves dual purpose:**
+1. **Checkout layer** - Presidents with discount codes complete purchase
+2. **Community gateway** - Public visitors discover tribute submission opportunity
+
+This maintains the controlled allocation model while opening a participation channel for fans who aren't part of the Presidents allocation.
+
+---
+
 ## ✨ Features
 
 ### Reusable Component Library
