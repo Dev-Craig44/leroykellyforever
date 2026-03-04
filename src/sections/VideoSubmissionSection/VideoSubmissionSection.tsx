@@ -108,10 +108,7 @@ export default function VideoSubmissionSection() {
       uploadData.append("message", formData.message.trim());
       uploadData.append("duration", videoDuration.toString());
 
-      const API_BASE = import.meta.env.VITE_API_BASE_URL || "";
-      if (!API_BASE) {
-        throw new Error("API configuration missing");
-      }
+      const API_BASE = import.meta.env.VITE_API_BASE_URL || "https://api.leroykellyforever.com";
 
       const response = await fetch(`${API_BASE}/submit-video`, {
         method: "POST",
