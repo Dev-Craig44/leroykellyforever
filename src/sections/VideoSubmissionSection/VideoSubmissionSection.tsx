@@ -96,6 +96,12 @@ export default function VideoSubmissionSection() {
       return;
     }
 
+    if (!formData.email.trim()) {
+      setErrorMessage("Please enter your email");
+      setStatus("error");
+      return;
+    }
+
     try {
       setStatus("uploading");
       setErrorMessage("");
@@ -211,14 +217,12 @@ export default function VideoSubmissionSection() {
               htmlFor="email"
               className="block text-sm font-semibold text-zinc-900 mb-2"
             >
-              Email{" "}
-              <span className="text-zinc-400 text-xs font-normal">
-                (optional, for submission confirmation)
-              </span>
+              Email <span className="text-red-500">*</span>
             </label>
             <input
               id="email"
               type="email"
+              required
               value={formData.email}
               onChange={(e) =>
                 setFormData({ ...formData, email: e.target.value })
