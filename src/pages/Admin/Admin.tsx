@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Navigation from "../../components/Navigation";
 import Footer from "../../sections/Footer/Footer";
 
@@ -18,6 +19,7 @@ interface VideoSubmission {
 }
 
 export default function Admin() {
+  const navigate = useNavigate();
   const [submissions, setSubmissions] = useState<VideoSubmission[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -26,6 +28,14 @@ export default function Admin() {
   const API_BASE =
     import.meta.env.VITE_API_BASE_URL ||
     "https://api.leroykellyforever.com";
+
+  // Check authentication
+  useEffect(() => {
+    const isAuthenticated = sessionStorage.getItem("adminAuth") === "true";
+    if (!isAuthenticated) {
+      navigate("/admin/login");
+    }
+  }, [navigate]);
 
   useEffect(() => {
     fetchSubmissions();
@@ -101,19 +111,32 @@ export default function Admin() {
     }
   };
 
+  const handleLogout = () => {
+    sessionStorage.removeItem("adminAuth");
+    navigate("/admin/login");
+  };
+
   return (
     <>
       <Navigation />
       <div className="min-h-screen bg-zinc-50 py-12 px-6">
         <div className="mx-auto max-w-7xl">
           {/* Header */}
-          <div className="mb-8">
-            <h1 className="text-4xl font-bold text-zinc-900 mb-2">
-              Video Submissions
-            </h1>
-            <p className="text-zinc-600">
-              Review and manage fan tribute videos
-            </p>
+          <div className="mb-8 flex items-center justify-between">
+            <div>
+              <h1 className="text-4xl font-bold text-zinc-900 mb-2">
+                Video Submissions
+              </h1>
+              <p className="text-zinc-600">
+                Review and manage fan tribute videos
+              </p>
+            </div>
+            <button
+              onClick={handleLogout}
+              className="px-4 py-2 rounded-lg border border-zinc-300 text-zinc-700 text-sm font-medium hover:bg-zinc-100 transition-colors"
+            >
+              Logout
+            </button>
           </div>
 
           {/* Filters */}
