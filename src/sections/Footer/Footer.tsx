@@ -32,9 +32,7 @@ export default function FooterSection() {
             <p className="text-[11px] tracking-[0.35em] uppercase text-zinc-500">
               Mail / Returns
             </p>
-            <p className="mt-2 text-sm text-zinc-700">
-              PO Box (coming soon)
-            </p>
+            <p className="mt-2 text-sm text-zinc-700">PO Box (coming soon)</p>
             <p className="mt-1 text-xs text-zinc-500">
               We’ll publish the official PO Box here after the first email
               unlock.
