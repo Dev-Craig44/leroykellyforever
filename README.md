@@ -1036,7 +1036,7 @@ Returns count of submissions by status.
 }
 ```
 
-**Delete Video Submission** *(Added 2026-03-05)*
+**Delete Video Submission** _(Added 2026-03-05)_
 
 ```bash
 DELETE /admin/submissions/:id
@@ -1055,6 +1055,7 @@ Permanently deletes a video submission (both file and database record).
 ```
 
 **Implementation:**
+
 - Deletes video file from `~/lk-api/uploads/videos/`
 - Removes database record from MongoDB
 - Gracefully handles missing files (continues with DB deletion)
@@ -1062,7 +1063,7 @@ Permanently deletes a video submission (both file and database record).
 
 ## Email Subscribers
 
-**Get All Subscribers** *(Added 2026-03-05)*
+**Get All Subscribers** _(Added 2026-03-05)_
 
 ```bash
 GET /admin/subscribers?limit=100&skip=0&active=true
@@ -1088,7 +1089,7 @@ Returns paginated list of email subscribers.
 }
 ```
 
-**Subscribe Endpoint** *(Added 2026-03-05)*
+**Subscribe Endpoint** _(Added 2026-03-05)_
 
 ```bash
 POST /subscribe
@@ -1136,6 +1137,7 @@ Saves email subscriber to MongoDB database.
 ```
 
 **Created Files (Droplet):**
+
 - `~/lk-api/models/EmailSubscriber.js` - Mongoose model
 - `~/lk-api/routes/subscribe.js` - Subscribe endpoint
 - Updated `~/lk-api/routes/admin.js` - Added DELETE and subscribers endpoints
@@ -1149,7 +1151,7 @@ Saves email subscriber to MongoDB database.
 
 Full-featured web dashboard for reviewing and managing video submissions.
 
-**Features:** *(Updated 2026-03-05)*
+**Features:** _(Updated 2026-03-05)_
 
 - 📊 **Dashboard Stats** - Real-time video submission counts (total, pending, approved, featured)
 - 📦 **Inventory Dashboard** - Live Shopify stock levels with low-stock alerts (≤5, ≤10, ≤20 units)
