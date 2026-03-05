@@ -20,8 +20,8 @@ export default function HeroSection() {
         >
           <source src="/video/LKad (2).MP4" type="video/mp4" />
         </video>
-        {/* Gradient overlay for text contrast */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/60" />
+        {/* Gradient overlay for text contrast - using brown tones */}
+        <div className="absolute inset-0 bg-gradient-to-b from-kelly-brown/50 via-kelly-brown/40 to-kelly-brown/60" />
       </div>
 
       {/* Content Layer */}
@@ -39,9 +39,9 @@ export default function HeroSection() {
           Hall of Fame Legacy
         </p>
 
-        <h1 className="mt-6 text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-[1.05] tracking-tight animate-slideUp text-white drop-shadow-2xl">
+        <h1 className="mt-6 text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-[1.05] tracking-tight animate-slideUp text-white drop-shadow-2xl font-display">
           Leroy Kelly
-          <span className="block text-white/90 font-extrabold">
+          <span className="block text-white/90 font-extrabold font-display">
             Forever
           </span>
         </h1>

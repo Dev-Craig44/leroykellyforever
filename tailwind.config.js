@@ -3,6 +3,15 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      colors: {
+        'kelly-brown': '#3B2A18',
+        'browns-orange': '#F26A1B',
+        'sand': '#F8F5F0',
+      },
+      fontFamily: {
+        display: ['Montserrat', 'sans-serif'],
+        body: ['Inter', 'Open Sans', 'sans-serif'],
+      },
       animation: {
         fadeIn: "fadeIn 0.5s ease-in",
         marquee: "marquee 50s linear infinite",

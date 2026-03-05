@@ -21,27 +21,27 @@ export default function ScarcityBadge({ className = "" }: ScarcityBadgeProps) {
     >
       <div className="flex items-baseline gap-2">
         <span
-          className={`text-5xl font-bold tracking-tight drop-shadow-sm ${
+          className={`text-5xl font-bold tracking-tight drop-shadow-sm font-display ${
             soldOut
               ? "text-red-600"
               : lowStock
                 ? "text-amber-600"
-                : "text-zinc-900"
+                : "text-browns-orange"
           }`}
         >
           {loading ? "..." : safeAvailable}
         </span>
 
-        <span className="text-xs font-medium text-gray-500 uppercase tracking-widest">
+        <span className="text-xs font-medium text-kelly-brown/60 uppercase tracking-widest">
           Available
         </span>
       </div>
 
-      <p className="text-xs text-zinc-500 tracking-wide">
+      <p className="text-xs text-kelly-brown/50 tracking-wide">
         Remaining in Edition I
       </p>
 
-      <p className="mt-1 text-[10px] text-zinc-400">
+      <p className="mt-1 text-[10px] text-kelly-brown/40">
         Inventory updates at checkout
       </p>
 

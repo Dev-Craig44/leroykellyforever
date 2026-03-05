@@ -14,7 +14,7 @@ export default function Drop() {
   });
 
   return (
-    <main className="bg-white text-zinc-900">
+    <main className="bg-white text-kelly-brown">
       <Navigation />
       <div className="pt-16">
         <MetaTags path="/drop" />
@@ -27,7 +27,7 @@ export default function Drop() {
           />
 
           <p
-            className="text-xs tracking-[0.35em] text-zinc-500 uppercase animate-fadeIn"
+            className="text-xs tracking-[0.35em] text-kelly-brown/50 uppercase animate-fadeIn"
             style={{ animationDelay: "0.1s", animationFillMode: "both" }}
           >
             Edition I

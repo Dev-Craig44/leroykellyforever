@@ -55,11 +55,11 @@ export default function LegacyStatsSection() {
                 transitionDelay: isInView ? `${idx * 100}ms` : "0ms",
               }}
             >
-              <div className="text-5xl md:text-6xl font-medium tracking-tight text-zinc-900 drop-shadow-sm">
+              <div className="text-5xl md:text-6xl font-display font-bold tracking-tight text-kelly-brown drop-shadow-sm">
                 {stat.value}
               </div>
               {stat.label !== "Pro Bowls" && stat.label !== "Hall of Fame" && (
-                <div className="text-[11px] tracking-[0.35em] uppercase text-zinc-500">
+                <div className="text-[11px] tracking-[0.35em] uppercase text-kelly-brown/50">
                   {stat.label}
                 </div>
               )}
@@ -68,7 +68,7 @@ export default function LegacyStatsSection() {
         </div>
 
         {/* Marquee...luxury version */}
-        <div className="mt-10 relative overflow-hidden border-y border-gray-100 bg-gradient-to-b from-white to-zinc-100 shadow-inner">
+        <div className="mt-10 relative overflow-hidden border-y border-kelly-brown/10 bg-gradient-to-b from-white to-sand shadow-inner">
           {/* edge fades */}
           <div className="pointer-events-none absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-white to-transparent" />
           <div className="pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-white to-transparent" />
@@ -76,11 +76,11 @@ export default function LegacyStatsSection() {
           <div className="flex w-max items-center gap-8 px-6 py-6 animate-marquee whitespace-nowrap motion-reduce:animate-none">
             {loopItems.map((item, idx) => (
               <div key={`${item}-${idx}`} className="flex items-center gap-6">
-                <span className="text-[16px] tracking-[0.22em] uppercase text-gray-800">
+                <span className="text-[16px] tracking-[0.22em] uppercase text-kelly-brown/80">
                   {item}
                 </span>
                 {/* hairline divider */}
-                <span className="h-3 w-px bg-gray-200" />
+                <span className="h-3 w-px bg-kelly-brown/20" />
               </div>
             ))}
           </div>

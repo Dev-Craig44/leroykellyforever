@@ -27,15 +27,15 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     ref,
   ) => {
     const baseStyles =
-      "inline-flex items-center justify-center gap-2 rounded-xl font-semibold transition-all duration-200 shadow-sm hover:shadow-md focus:outline-none focus:ring-2 focus:ring-zinc-300 focus:ring-offset-2 disabled:opacity-60 disabled:cursor-not-allowed disabled:shadow-none";
+      "inline-flex items-center justify-center gap-2 rounded-xl font-semibold transition-all duration-200 shadow-sm hover:shadow-md focus:outline-none focus:ring-2 focus:ring-browns-orange/30 focus:ring-offset-2 disabled:opacity-60 disabled:cursor-not-allowed disabled:shadow-none";
 
     const variants = {
       primary:
-        "bg-black text-white hover:bg-zinc-900 active:scale-[0.98] hover:-translate-y-0.5",
+        "bg-kelly-brown text-white hover:bg-kelly-brown/90 hover:shadow-browns-orange/20 active:scale-[0.98] hover:-translate-y-0.5",
       secondary:
-        "bg-zinc-100 text-zinc-900 hover:bg-zinc-200 active:scale-[0.98]",
+        "bg-sand text-kelly-brown hover:bg-sand/80 active:scale-[0.98]",
       outline:
-        "border-2 border-zinc-900 text-zinc-900 hover:bg-zinc-900 hover:text-white active:scale-[0.98]",
+        "border-2 border-kelly-brown text-kelly-brown hover:bg-kelly-brown hover:text-white active:scale-[0.98]",
     };
 
     const sizes = {

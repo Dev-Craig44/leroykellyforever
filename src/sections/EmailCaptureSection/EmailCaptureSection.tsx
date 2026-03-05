@@ -63,15 +63,15 @@ export default function EmailCaptureSection() {
   const { ref, isInView } = useInView({ threshold: 0.2 });
 
   return (
-    <section id="email-capture" className="bg-zinc-50 py-20 px-6" ref={ref}>
+    <section id="email-capture" className="bg-sand py-20 px-6" ref={ref}>
       <div
         className={`text-center transition-all duration-700 ${
           isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
         }`}
       >
-        <h2 className="text-2xl font-semibold tracking-tight">Join the Drop</h2>
+        <h2 className="text-2xl font-display font-bold tracking-tight text-kelly-brown">Join the Drop</h2>
         <p
-          className={`mt-2 text-zinc-600 transition-all duration-700 delay-100 ${
+          className={`mt-2 text-kelly-brown/70 transition-all duration-700 delay-100 ${
             isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}
         >
@@ -92,19 +92,19 @@ export default function EmailCaptureSection() {
             autoComplete="email"
             required
             placeholder="Email address"
-            className="w-full sm:w-80 px-4 py-3 border border-zinc-200 rounded-xl shadow-inner focus:outline-none focus:ring-2 focus:ring-zinc-300 focus:shadow-md transition-all duration-200 hover:border-zinc-300"
+            className="w-full sm:w-80 px-4 py-3 border border-kelly-brown/20 rounded-xl shadow-inner focus:outline-none focus:ring-2 focus:ring-browns-orange/30 focus:shadow-md transition-all duration-200 hover:border-kelly-brown/30"
           />
 
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full sm:w-auto px-6 py-3 rounded-xl bg-black text-white font-semibold hover:bg-zinc-800 shadow-sm hover:shadow-md transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed disabled:shadow-none disabled:transform-none"
+            className="w-full sm:w-auto px-6 py-3 rounded-xl bg-kelly-brown text-white font-semibold hover:bg-kelly-brown/90 shadow-sm hover:shadow-md transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed disabled:shadow-none disabled:transform-none"
           >
             {isLoading ? "Submitting…" : "Notify Me"}
           </button>
         </form>
 
-        <p className="mt-3 text-sm text-zinc-500">
+        <p className="mt-3 text-sm text-kelly-brown/50">
           No spam…just important updates.
         </p>
 
