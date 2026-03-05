@@ -1036,15 +1036,127 @@ Returns count of submissions by status.
 }
 ```
 
+**Delete Video Submission** *(Added 2026-03-05)*
+
+```bash
+DELETE /admin/submissions/:id
+```
+
+Permanently deletes a video submission (both file and database record).
+
+**Response:**
+
+```json
+{
+  "ok": true,
+  "message": "Video deleted successfully",
+  "deletedId": "507f1f77bcf86cd799439011"
+}
+```
+
+**Implementation:**
+- Deletes video file from `~/lk-api/uploads/videos/`
+- Removes database record from MongoDB
+- Gracefully handles missing files (continues with DB deletion)
+- Logs all deletion operations
+
+## Email Subscribers
+
+**Get All Subscribers** *(Added 2026-03-05)*
+
+```bash
+GET /admin/subscribers?limit=100&skip=0&active=true
+```
+
+Returns paginated list of email subscribers.
+
+**Response:**
+
+```json
+{
+  "ok": true,
+  "subscribers": [
+    {
+      "email": "user@example.com",
+      "subscribedAt": "2026-03-05T12:00:00.000Z",
+      "source": "website"
+    }
+  ],
+  "total": 145,
+  "limit": 100,
+  "skip": 0
+}
+```
+
+**Subscribe Endpoint** *(Added 2026-03-05)*
+
+```bash
+POST /subscribe
+Content-Type: application/json
+
+{
+  "email": "user@example.com"
+}
+```
+
+Saves email subscriber to MongoDB database.
+
+**Response:**
+
+```json
+{
+  "ok": true,
+  "message": "Successfully subscribed!"
+}
+```
+
+**Implementation Details:**
+
+- **Model:** `models/EmailSubscriber.js`
+- **Route:** `routes/subscribe.js`
+- **Database:** MongoDB Atlas
+- **Features:**
+  - Email validation (format check)
+  - Duplicate prevention (unique index)
+  - Trackable source (`website`, `manual`, `import`)
+  - Active status flag for unsubscribes
+  - Automatic timestamps
+
+**EmailSubscriber Schema:**
+
+```javascript
+{
+  email: String,          // Lowercase, unique, validated
+  subscribedAt: Date,     // Subscription timestamp
+  source: String,         // website | manual | import
+  active: Boolean,        // true (subscribed) | false (unsubscribed)
+  createdAt: Date,        // Auto-generated
+  updatedAt: Date         // Auto-generated
+}
+```
+
+**Created Files (Droplet):**
+- `~/lk-api/models/EmailSubscriber.js` - Mongoose model
+- `~/lk-api/routes/subscribe.js` - Subscribe endpoint
+- Updated `~/lk-api/routes/admin.js` - Added DELETE and subscribers endpoints
+- Updated `~/lk-api/src/index.js` - Wired up subscribe route
+
+**PM2 Status:** Restarted on 2026-03-05
+
 ## Admin Dashboard UI
 
 **Location:** `/admin` (password protected)
 
 Full-featured web dashboard for reviewing and managing video submissions.
 
-**Features:**
+**Features:** *(Updated 2026-03-05)*
 
+- 📊 **Dashboard Stats** - Real-time video submission counts (total, pending, approved, featured)
+- 📦 **Inventory Dashboard** - Live Shopify stock levels with low-stock alerts (≤5, ≤10, ≤20 units)
+- 📧 **Email Subscribers** - View subscriber list with expandable details and signup dates
 - 📹 **Video Previews** - Watch submissions directly in browser with playback controls
+- ⬇️ **Download Videos** - Download any submission to local machine
+- 🗑️ **Delete Videos** - Permanently delete rejected submissions (with confirmation)
 - 🏷️ **Status Filtering** - View all, pending, approved, featured, or rejected submissions
 - ✅ **Quick Actions** - Approve, reject, or feature videos with one click
 - 📊 **Submission Details** - View name, email, message, duration, and submission date
