@@ -8,7 +8,7 @@ export default function HatVideoCardSection() {
   const { ref, isInView } = useInView({ threshold: 0.1 });
 
   return (
-    <section className="bg-sand" ref={ref}>
+    <section className="bg-zinc-50" ref={ref}>
       <div className="mx-auto max-w-6xl px-6 py-16">
         {/* Scarcity Block */}
         <div
@@ -49,10 +49,10 @@ export default function HatVideoCardSection() {
           <div className="p-5 space-y-4">
             {/* Header */}
             <div className="flex items-center justify-between">
-              <h3 className="text-base font-semibold text-kelly-brown font-display">
+              <h3 className="text-base font-semibold text-zinc-900 font-display">
                 Leroy Kelly Forever Hat
               </h3>
-              <span className="text-[10px] tracking-[0.35em] uppercase text-kelly-brown/50">
+              <span className="text-[10px] tracking-[0.35em] uppercase text-zinc-500">
                 Drop #1
               </span>
             </div>
@@ -62,8 +62,8 @@ export default function HatVideoCardSection() {
               <span className="inline-flex items-center px-3 py-1 rounded-full bg-browns-orange text-white font-medium text-xs shadow-sm">
                 Edition I
               </span>
-              <span className="text-kelly-brown/50 text-xs">•</span>
-              <span className="text-kelly-brown/70 text-xs">Limited to 50</span>
+              <span className="text-zinc-500 text-xs">•</span>
+              <span className="text-zinc-600 text-xs">Limited to 50</span>
             </div>
 
             {/* CTA Button */}
@@ -79,13 +79,13 @@ export default function HatVideoCardSection() {
             </Button>
 
             {/* Microcopy */}
-            <p className="text-xs text-center text-kelly-brown/50">
+            <p className="text-xs text-center text-zinc-500">
               Ships within 48 hours
             </p>
 
             {/* Family Story */}
-            <div className="pt-3 border-t border-kelly-brown/10">
-              <p className="text-xs text-kelly-brown/60 text-center leading-relaxed">
+            <div className="pt-3 border-t border-zinc-200">
+              <p className="text-xs text-zinc-600 text-center leading-relaxed">
                 Brooklynn, Leroy's granddaughter, is helping lead this legacy
                 drop.
               </p>

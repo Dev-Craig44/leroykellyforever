@@ -20,8 +20,8 @@ export default function HeroSection() {
         >
           <source src="/video/LKad (2).MP4" type="video/mp4" />
         </video>
-        {/* Gradient overlay for text contrast - using brown tones */}
-        <div className="absolute inset-0 bg-gradient-to-b from-kelly-brown/50 via-kelly-brown/40 to-kelly-brown/60" />
+        {/* Gradient overlay for text contrast */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/60" />
       </div>
 
       {/* Content Layer */}

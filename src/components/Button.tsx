@@ -31,11 +31,11 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
     const variants = {
       primary:
-        "bg-kelly-brown text-white hover:bg-kelly-brown/90 hover:shadow-browns-orange/20 active:scale-[0.98] hover:-translate-y-0.5",
+        "bg-browns-orange text-white hover:bg-browns-orange/90 active:scale-[0.98] hover:-translate-y-0.5",
       secondary:
-        "bg-sand text-kelly-brown hover:bg-sand/80 active:scale-[0.98]",
+        "bg-zinc-100 text-zinc-900 hover:bg-zinc-200 active:scale-[0.98]",
       outline:
-        "border-2 border-kelly-brown text-kelly-brown hover:bg-kelly-brown hover:text-white active:scale-[0.98]",
+        "border-2 border-zinc-900 text-zinc-900 hover:bg-zinc-900 hover:text-white active:scale-[0.98]",
     };
 
     const sizes = {

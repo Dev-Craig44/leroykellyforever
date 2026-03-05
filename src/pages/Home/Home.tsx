@@ -9,7 +9,7 @@ export default function Home() {
   const { ref, isInView } = useInView({ threshold: 0.2 });
 
   return (
-    <main className="bg-white text-kelly-brown">
+    <main className="bg-white text-zinc-900">
       <Navigation />
       <div className="pt-16">
         <MetaTags />

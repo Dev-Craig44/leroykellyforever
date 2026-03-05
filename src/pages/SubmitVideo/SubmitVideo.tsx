@@ -4,7 +4,7 @@ import VideoSubmissionSection from "../../sections/VideoSubmissionSection";
 
 export default function SubmitVideo() {
   return (
-    <main className="bg-white text-kelly-brown">
+    <main className="bg-white text-zinc-900">
       <Navigation />
       <div className="pt-16">
         <MetaTags
@@ -14,16 +14,16 @@ export default function SubmitVideo() {
         />
 
         {/* Header */}
-        <section className="bg-gradient-to-b from-white to-sand px-6 pt-12 pb-10 text-center">
-          <p className="text-xs tracking-[0.35em] uppercase text-kelly-brown/50 animate-fadeIn">
+        <section className="bg-gradient-to-b from-white to-zinc-50 px-6 pt-12 pb-10 text-center">
+          <p className="text-xs tracking-[0.35em] uppercase text-zinc-400 animate-fadeIn">
             Give Leroy His Flowers
           </p>
 
-          <h1 className="mt-4 text-4xl sm:text-5xl font-display font-bold tracking-tight text-kelly-brown drop-shadow-sm animate-slideUp">
+          <h1 className="mt-4 text-4xl sm:text-5xl font-display font-bold tracking-tight text-zinc-900 drop-shadow-sm animate-slideUp">
             Share Your Story
           </h1>
 
-          <p className="mt-4 text-lg text-kelly-brown/70 max-w-2xl mx-auto leading-relaxed">
+          <p className="mt-4 text-lg text-zinc-600 max-w-2xl mx-auto leading-relaxed">
             Tell us what Leroy Kelly means to you. Submit a 15–60 second video
             and we may feature it on Instagram.
           </p>

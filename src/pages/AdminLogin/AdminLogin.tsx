@@ -23,7 +23,7 @@ export default function AdminLogin() {
   };
 
   return (
-    <div className="min-h-screen bg-sand flex items-center justify-center px-6">
+    <div className="min-h-screen bg-zinc-50 flex items-center justify-center px-6">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <img
@@ -31,20 +31,22 @@ export default function AdminLogin() {
             alt="Leroy Kelly Forever"
             className="w-16 h-auto mx-auto mb-4 opacity-90"
           />
-          <h1 className="text-3xl font-display font-bold text-kelly-brown mb-2">Admin Login</h1>
-          <p className="text-kelly-brown/70">
+          <h1 className="text-3xl font-display font-bold text-zinc-900 mb-2">
+            Admin Login
+          </h1>
+          <p className="text-zinc-600">
             Enter password to access video submissions
           </p>
         </div>
 
         <form
           onSubmit={handleLogin}
-          className="bg-white rounded-2xl border border-kelly-brown/10 shadow-sm p-8"
+          className="bg-white rounded-2xl border border-zinc-200 shadow-sm p-8"
         >
           <div className="mb-6">
             <label
               htmlFor="password"
-              className="block text-sm font-semibold text-kelly-brown mb-2"
+              className="block text-sm font-semibold text-zinc-900 mb-2"
             >
               Password
             </label>
@@ -57,7 +59,7 @@ export default function AdminLogin() {
                 setError("");
               }}
               placeholder="Enter admin password"
-              className="w-full px-4 py-3 border border-kelly-brown/20 rounded-xl shadow-inner focus:outline-none focus:ring-2 focus:ring-browns-orange/30 focus:shadow-md transition-all duration-200 hover:border-kelly-brown/30"
+              className="w-full px-4 py-3 border border-zinc-200 rounded-xl shadow-inner focus:outline-none focus:ring-2 focus:ring-browns-orange/30 focus:shadow-md transition-all duration-200 hover:border-zinc-300"
               autoFocus
             />
           </div>
@@ -70,12 +72,12 @@ export default function AdminLogin() {
 
           <button
             type="submit"
-            className="w-full px-6 py-3 rounded-xl bg-kelly-brown text-white font-semibold hover:bg-kelly-brown/90 shadow-sm hover:shadow-md transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.98]"
+            className="w-full px-6 py-3 rounded-xl bg-browns-orange text-white font-semibold hover:bg-browns-orange/90 shadow-sm hover:shadow-md transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.98]"
           >
             Login
           </button>
 
-          <p className="mt-6 text-xs text-center text-kelly-brown/50">
+          <p className="mt-6 text-xs text-center text-zinc-500">
             Access restricted to authorized administrators only
           </p>
         </form>
