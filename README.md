@@ -45,6 +45,7 @@ Edition I is part of a generational legacy initiative led by family.
 **Issue**: Admin dashboard (`leroykellyforever.com/admin`) failed to connect to backend API with CORS errors. Backend only whitelisted `www.leroykellyforever.com` but users accessed via `leroykellyforever.com` (without www).
 
 **Resolution**: Updated backend API CORS configuration (`~/lk-api/src/index.js`) to allow both domains:
+
 - `https://www.leroykellyforever.com`
 - `https://leroykellyforever.com`
 
