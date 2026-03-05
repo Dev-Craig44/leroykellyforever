@@ -1145,6 +1145,123 @@ Saves email subscriber to MongoDB database.
 
 **PM2 Status:** Restarted on 2026-03-05
 
+### Subscriber Import Script _(Added 2026-03-05)_
+
+**Location:** `~/lk-api/scripts/import-subscribers.js`
+
+Node.js script for importing email subscribers from Mailchimp CSV exports into MongoDB.
+
+**Usage:**
+
+```bash
+cd ~/lk-api
+node scripts/import-subscribers.js scripts/subscribers.csv
+```
+
+**Features:**
+
+- Parses CSV files with `Email Address` and `OPTIN_TIME` columns
+- Validates email format and checks for duplicates
+- Preserves original signup timestamps from Mailchimp
+- Sets `source: 'import'` for tracking migration
+- Skips existing subscribers automatically
+- Provides detailed import summary (imported vs skipped counts)
+
+**Dependencies:**
+
+- `csv-parse` - CSV parsing library (installed via `npm install csv-parse`)
+- Mongoose for MongoDB connection
+- Uses same credentials as main API (`lk-cluster.9pdzorp.mongodb.net`)
+
+**Wave 1 Subscribers Imported (2026-03-05):**
+
+Successfully migrated 5 Wave 1 Browns Backers club subscribers:
+
+1. `agentfresh37@yahoo.com` - Cleveland Heights Dawg Pound
+2. `dreich1218@hotmail.com` - West Park Browns Backers
+3. `amsteljacob@gmail.com` - Browns Backers with a Twist
+4. `scottnunnari@gmail.com` - Muni Lot Browns Backers
+5. `hingetownbrownsbackers@gmail.com` - Hingetown Browns Backers
+
+All subscribers subscribed on: March 2, 2026 at 19:13:56 UTC
+
+**CSV Format:**
+
+```csv
+Email Address,OPTIN_TIME
+user@example.com,2026-03-02 19:13:56
+```
+
+### Browns Backers Chapters Import _(Added 2026-03-05)_
+
+**Location:** `~/lk-api/scripts/import-chapters.js`
+
+**Model:** `~/lk-api/models/Chapter.js`
+
+Node.js script for importing Browns Backers chapter data into MongoDB.
+
+**Usage:**
+
+```bash
+cd ~/lk-api
+node scripts/import-chapters.js scripts/chapters.csv
+```
+
+**Features:**
+
+- Parses CSV with chapter title, member count, president info, viewing location
+- Extracts structured data from multi-line president field (name, phone, email)
+- Parses viewing location into venue name and address
+- Updates existing chapters on re-import (upsert behavior)
+- Provides detailed import summary
+
+**Chapter Schema:**
+
+```javascript
+{
+  title: String,                    // Chapter name
+  members: Number,                  // Member count
+  yearEstablished: Number,          // Year founded
+  president: {
+    name: String,                   // President name
+    phone: String,                  // Contact phone
+    email: String                   // Contact email
+  },
+  viewingLocation: {
+    name: String,                   // Venue name
+    address: String,                // Full address
+    fullText: String                // Original text
+  },
+  chapterUrl: String,               // Browns Backers Worldwide URL
+  scrapedAt: Date,                  // Data collection timestamp
+  active: Boolean,                  // Active status
+  createdAt: Date,                  // Auto-generated
+  updatedAt: Date                   // Auto-generated
+}
+```
+
+**Imported Data (2026-03-05):**
+
+Successfully migrated **360 Browns Backers chapters** worldwide:
+
+**Top 5 Chapters by Member Count:**
+
+1. Chi-town Dawg Pound - 841 members
+2. Punta Gorda Charlotte County Browns Backers - 717 members
+3. Big Apple Browns Backers of NYC - 568 members
+4. Sarasota Browns Backers - 496 members
+5. Englewood Browns Backers - 454 members
+
+**Data Source:** Browns Backers Worldwide chapter directory (scraped February 2026)
+
+**Use Cases:**
+
+- Chapter directory pages
+- Regional email campaigns
+- Wave code validation
+- Location-based features
+- President contact lookup
+
 ## Admin Dashboard UI
 
 **Location:** `/admin` (password protected)
