@@ -8,10 +8,10 @@ interface MetaTagsProps {
 }
 
 export default function MetaTags({
-  title = "Leroy Kelly Forever | Limited Edition Hat Drop",
-  description = "Honoring Hall of Fame RB Leroy Kelly with an exclusive 50-hat limited release. Join the private list for first access.",
+  title = "Leroy Kelly Forever",
+  description = "Honoring the legacy of Hall of Fame running back Leroy Kelly.",
   path = "/",
-  image = "/images/lkWithHat.jpg",
+  image = "/logos/logo_signature.svg",
 }: MetaTagsProps) {
   useEffect(() => {
     // Update page title

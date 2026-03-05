@@ -12,11 +12,7 @@ export default function Home() {
     <main className="bg-white text-zinc-900">
       <Navigation />
       <div className="pt-16">
-        <MetaTags
-          title="Leroy Kelly Forever | Hall of Fame Legacy Hat Drop"
-          description="Honoring Cleveland Browns Hall of Fame RB Leroy Kelly (1964-1973, 7,274 career rushing yards) with a limited 50-hat release. Join the private list for exclusive first access to Edition I."
-          path="/"
-        />
+        <MetaTags />
         <HeroSection />
 
         <LegacyStatsSection />

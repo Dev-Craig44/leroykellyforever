@@ -17,11 +17,7 @@ export default function Drop() {
     <main className="bg-white text-zinc-900">
       <Navigation />
       <div className="pt-16">
-        <MetaTags
-          title="Edition I - The First 50 | Leroy Kelly Forever"
-          description="Secure your Leroy Kelly Forever Hat. Limited to 50 pieces. Official legacy release honoring the Hall of Fame running back. Ships within 48 hours."
-          path="/drop"
-        />
+        <MetaTags path="/drop" />
 
         <section className="bg-white px-6 pt-20 pb-10 text-center">
           <img
