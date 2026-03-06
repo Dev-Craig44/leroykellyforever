@@ -70,14 +70,14 @@ export default function EmailCaptureSection() {
         }`}
       >
         <h2 className="text-2xl font-display font-bold tracking-tight text-zinc-900">
-          Join the Drop
+          Don't Miss Edition II
         </h2>
         <p
           className={`mt-2 text-zinc-600 transition-all duration-700 delay-100 ${
             isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}
         >
-          Get first access to the Leroy Kelly Forever hat release…plus legacy
+          Get first notice when future drops go live, plus exclusive legacy
           updates.
         </p>
 

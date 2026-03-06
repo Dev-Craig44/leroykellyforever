@@ -3,7 +3,6 @@ import { useInventory } from "../../hooks/useInventory";
 import EmailCaptureSection from "../../sections/EmailCaptureSection";
 import FooterSection from "../../sections/Footer";
 import HatVideoCardSection from "../../sections/HatVideoCardSection";
-import LegacyStatsSection from "../../sections/LegacyStatsSection";
 import SealSection from "../../sections/SealSection";
 
 export default function Drop() {
@@ -67,7 +66,6 @@ export default function Drop() {
         </section>
 
         <HatVideoCardSection />
-        <LegacyStatsSection />
         <EmailCaptureSection />
         <SealSection />
         <FooterSection />
