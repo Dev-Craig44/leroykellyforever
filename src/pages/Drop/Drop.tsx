@@ -2,7 +2,9 @@ import { MetaTags, Navigation } from "../../components";
 import { useInventory } from "../../hooks/useInventory";
 import EmailCaptureSection from "../../sections/EmailCaptureSection";
 import FooterSection from "../../sections/Footer";
+import HatRevealSection from "../../sections/HatRevealSection";
 import HatVideoCardSection from "../../sections/HatVideoCardSection";
+import ProductDetailSection from "../../sections/ProductDetailSection";
 import SealSection from "../../sections/SealSection";
 
 export default function Drop() {
@@ -65,7 +67,9 @@ export default function Drop() {
           </div>
         </section>
 
+        <HatRevealSection />
         <HatVideoCardSection />
+        <ProductDetailSection />
         <EmailCaptureSection />
         <SealSection />
         <FooterSection />

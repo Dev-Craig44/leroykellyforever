@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Button, MetaTags, Navigation } from "../../components";
 import { useInView } from "../../hooks/useInView";
 import FooterSection from "../../sections/Footer";
+import HatRevealSection from "../../sections/HatRevealSection";
 import HeroSection from "../../sections/HeroSection";
 import LegacyStatsSection from "../../sections/LegacyStatsSection";
 
@@ -16,6 +17,8 @@ export default function Home() {
         <HeroSection />
 
         <LegacyStatsSection />
+
+        <HatRevealSection />
 
         <div
           ref={ref}
