@@ -1,9 +1,20 @@
 import { Button, Card, ScarcityBadge } from "../../components";
 import { useInView } from "../../hooks/useInView";
 
-export default function HatVideoCardSection() {
-  const SHOPIFY_PRODUCT_URL =
-    "https://shop.leroykellyforever.com/products/leroy-kelly-forever-hat-edition-i";
+interface HatVideoCardSectionProps {
+  clubAccessCode?: string | null;
+}
+
+export default function HatVideoCardSection({
+  clubAccessCode,
+}: HatVideoCardSectionProps) {
+  const handleClaimClick = () => {
+    const url = clubAccessCode
+      ? `https://shop.leroykellyforever.com/discount/${clubAccessCode}?redirect=/products/leroy-kelly-forever-hat-edition-i`
+      : "https://shop.leroykellyforever.com/products/leroy-kelly-forever-hat-edition-i";
+
+    window.open(url, "_blank", "noopener,noreferrer");
+  };
 
   const { ref, isInView } = useInView({ threshold: 0.1 });
 
@@ -70,12 +81,10 @@ export default function HatVideoCardSection() {
             <Button
               variant="primary"
               size="lg"
-              href={SHOPIFY_PRODUCT_URL}
-              target="_blank"
-              rel="noopener noreferrer"
+              onClick={handleClaimClick}
               className="w-full"
             >
-              Secure Now
+              {clubAccessCode ? "Claim Your Allocation" : "Secure Now"}
             </Button>
 
             {/* Microcopy */}

@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { MetaTags, Navigation } from "../../components";
 import { useInventory } from "../../hooks/useInventory";
 import EmailCaptureSection from "../../sections/EmailCaptureSection";
@@ -13,6 +14,16 @@ export default function Drop() {
     ttlMs: 30_000,
     fallbackAvailable: 50,
   });
+
+  const [clubAccessCode, setClubAccessCode] = useState<string | null>(null);
+
+  useEffect(() => {
+    // Check for club access code from sessionStorage
+    const code = sessionStorage.getItem("clubAccessCode");
+    if (code) {
+      setClubAccessCode(code);
+    }
+  }, []);
 
   return (
     <main className="bg-white text-zinc-900">
@@ -31,7 +42,7 @@ export default function Drop() {
             className="text-xs tracking-[0.35em] text-zinc-500 uppercase animate-fadeIn"
             style={{ animationDelay: "0.1s", animationFillMode: "both" }}
           >
-            Edition I
+            {clubAccessCode ? "Club Access Verified" : "Edition I"}
           </p>
 
           <h1
@@ -40,6 +51,17 @@ export default function Drop() {
           >
             The First 50
           </h1>
+
+          {clubAccessCode && (
+            <div
+              className="mt-3 px-4 py-2 mx-auto max-w-md rounded-lg bg-emerald-50 border border-emerald-200 animate-fadeIn"
+              style={{ animationDelay: "0.25s", animationFillMode: "both" }}
+            >
+              <p className="text-sm font-medium text-emerald-800">
+                ✓ Your club allocation is ready to claim
+              </p>
+            </div>
+          )}
 
           <p
             className="mx-auto mt-4 max-w-md text-zinc-600 animate-fadeIn"
@@ -68,7 +90,7 @@ export default function Drop() {
         </section>
 
         <HatRevealSection />
-        <HatVideoCardSection />
+        <HatVideoCardSection clubAccessCode={clubAccessCode} />
         <ProductDetailSection />
         <EmailCaptureSection />
         <SealSection />
