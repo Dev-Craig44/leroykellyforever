@@ -516,6 +516,233 @@ System now supports:
 
 ---
 
+## Controlled Email Distribution System (Wave-Based Access)
+
+This section documents a real-world production system that orchestrated a controlled product launch using integrated web, commerce, and email marketing infrastructure.
+
+### 1. Objective
+
+The goal was to launch a limited-edition product (50 units) using a controlled wave-based distribution strategy that:
+
+- Distributed access in phased waves to mitigate risk and gather feedback
+- Assigned each group a unique discount/access code for tracking and exclusivity
+- Tracked engagement and behavior at the individual code level
+- Built a data foundation for future allocation tiers and club performance metrics
+
+This was not a promotional blast. It was controlled allocation infrastructure designed to test systems, measure engagement, and establish a repeatable framework for future releases.
+
+### 2. Architecture Overview
+
+The system integrates three platforms to create a seamless, code-gated checkout experience:
+
+**System Flow:**
+
+```
+User receives email → Click CTA → /club-access?code=XYZ
+  ↓
+Code stored in sessionStorage
+  ↓
+User redirected to protected Drop page
+  ↓
+React reads stored code from sessionStorage
+  ↓
+CTA button dynamically builds Shopify discount URL
+  ↓
+Format: /discount/{CODE}?redirect=/products/leroy-kelly-hat
+  ↓
+Shopify applies discount at checkout
+```
+
+**Tech Stack:**
+
+- **Frontend**: React app hosted on Vercel (leroykellyforever.com)
+- **Commerce**: Shopify (checkout + discount engine)
+- **Email**: Mailchimp (campaign delivery + audience segmentation)
+- **State Management**: sessionStorage for code persistence across page navigation
+
+**Key Implementation Details:**
+
+- `/club-access` route extracts `?code=` query parameter
+- Code is stored client-side using `sessionStorage.setItem('accessCode', code)`
+- Drop page reads code and injects it into Shopify discount URL
+- Button onClick handler dynamically constructs: `https://shop.leroykellyforever.com/discount/${code}?redirect=/cart/51769012748570:1`
+- Shopify applies discount automatically at checkout stage (not visible until cart)
+
+### 3. Wave Strategy
+
+The release was structured as a phased rollout to control risk and optimize based on real user behavior.
+
+**Wave 1: Initial Test Group**
+
+- **Size**: 5 Browns Backers club presidents
+- **Codes**: `LK-CLEHEIGHTS`, `LK-HINGETOWN`, `LK-WESTPARK`, `LK-TWIST`, `LK-MUNILOT`
+- **Allocation**: Each code limited to a fixed number of uses
+- **Window**: 72-hour exclusive access
+- **Purpose**: Test end-to-end system, validate discount logic, measure initial engagement
+
+**Wave 2: Expanded Rollout** (Planned)
+
+- **Size**: 10–15 additional clubs
+- **Structure**: Each club receives unique code and allocation
+- **Distribution**: Club presidents internally distribute access to members
+
+**Why Wave-Based Rollout?**
+
+1. **Risk Control**: Identify technical or messaging issues with small audience before broader release
+2. **Feedback Loop**: Gather real-world user behavior data to refine messaging and UX
+3. **Performance Validation**: Ensure API, checkout flow, and email infrastructure handle load
+4. **Strategic Scarcity**: Create early adopter exclusivity while preserving inventory for later waves
+5. **Data Collection**: Track which clubs engage most, informing future allocation tiers
+
+### 4. Email Personalization System
+
+Mailchimp merge tags enabled dynamic, personalized email content for each recipient.
+
+**Merge Tags Used:**
+
+- `*|FNAME|*` - Recipient first name
+- `*|CLUB|*` - Browns Backers club name
+- `*|CODE|*` - Unique discount code (e.g., LK-CLEHEIGHTS)
+
+**Example Personalized URL:**
+
+```
+https://leroykellyforever.com/club-access?code=*|CODE|*
+```
+
+Resolves to:
+
+```
+https://leroykellyforever.com/club-access?code=LK-CLEHEIGHTS
+```
+
+**Messaging Evolution:**
+
+**Initial Version (System-Driven):**
+
+- Focus: Technical instructions and steps
+- Tone: Transactional, procedural
+- Result: Low engagement, unclear value proposition
+
+**Improved Version (Mission-Driven):**
+
+- Focus: Legacy preservation, community honor, exclusivity
+- Tone: Personal, narrative-based, ceremonial
+- Language: "You've been selected to lead", "exclusive allocation window", "honor Leroy Kelly's legacy"
+- Result: Higher perceived value, clear call to action
+
+**Key Lesson:**
+
+Technical clarity is necessary but insufficient. Emails must connect the action (using a discount code) to a larger mission (preserving Browns history, leading their community). Storytelling drives engagement more than system instructions.
+
+### 5. Key Challenges & Solutions
+
+**Issue: Discount Code Not Applying**
+
+- **Problem**: Initial implementation used standard product URL without discount parameter
+- **Solution**: Switched to Shopify's `/discount/{code}?redirect=...` URL format
+- **Result**: Discount applied automatically at checkout without manual code entry
+
+**Issue: onClick Handler Not Firing**
+
+- **Problem**: Button click events not triggering navigation to Shopify
+- **Debugging**: Added `console.log` statements to verify event binding and code extraction
+- **Solution**: Confirmed React state updates and corrected URL construction logic
+- **Result**: Click events properly fire and build correct Shopify URL
+
+**Issue: Users Not Seeing Discount Until Checkout**
+
+- **Problem**: Expectation that discount would appear on product page
+- **Insight**: Shopify applies discounts at checkout stage, not on product detail pages
+- **Solution**: No code change needed - documented expected behavior and set proper user expectations
+- **Impact**: Reduced confusion by clarifying when discount becomes visible
+
+**Issue: Low Click Rate (0% in Wave 1 Test)**
+
+- **Problem**: Emails delivered successfully (100% rate) but zero clicks on CTA
+- **Diagnosis**: Not a technical failure - URLs worked correctly when tested manually
+- **Root Cause**: Messaging tone too system-driven, lacked urgency and emotional connection
+- **Solution**: Rewrote email copy to emphasize exclusivity, leadership role, and legacy preservation
+- **Learning**: Deliverability ≠ Engagement. Email must inspire action, not just inform.
+
+### 6. Results & Metrics
+
+**Wave 1 Performance:**
+
+- **Emails Sent**: 5
+- **Deliverability**: 100% (5/5 delivered successfully)
+- **Open Rate**: ~20% (1 confirmed open)
+- **Click Rate**: 0% (no CTA clicks)
+
+**Important Context:**
+
+- Open rate data unreliable due to Apple Mail Privacy Protection (pre-loads images, inflates open rates)
+- True open rate likely higher or lower than reported 20%
+- Click rate accurately measured (no false positives)
+
+**Key Insights from Data:**
+
+1. **Infrastructure Works**: Email delivery, domain authentication, and technical systems functioned correctly
+2. **Messaging Failed**: Zero clicks indicate content/tone issue, not technical failure
+3. **Trust Gap**: Recipients may not have understood value proposition or feared phishing
+4. **Iteration Needed**: System is sound; messaging requires A/B testing and refinement
+
+### 7. Key Takeaways
+
+This project demonstrates several real-world engineering and product competencies:
+
+**Full-Stack System Integration:**
+
+- Connected three separate platforms (React, Shopify, Mailchimp) into cohesive user experience
+- Built client-side state management to persist codes across navigation
+- Implemented dynamic URL generation based on user-specific data
+
+**Real-World System Design:**
+
+- Designed phased rollout strategy that balances risk and opportunity
+- Built tracking infrastructure to measure performance at code/club level
+- Created fail-soft systems (codes work even if users navigate directly to drop page)
+
+**Data-Driven Iteration:**
+
+- Used live campaign data to diagnose messaging vs. technical failures
+- Identified blockers (email tone) separate from enablers (working infrastructure)
+- Planned improvements based on measurable outcomes, not assumptions
+
+**Bridging Engineering & Business Outcomes:**
+
+- Translated business goal (controlled launch) into technical architecture (code-gated checkout)
+- Built marketing systems that serve strategic objectives (club tracking, future NFT gates)
+- Designed for scalability (same system supports 5 or 500 codes)
+
+### 8. Future Improvements
+
+**Analytics Enhancements:**
+
+- Custom event tracking (code redemptions, button clicks, page views)
+- Google Analytics or Segment integration for funnel visualization
+- Heatmaps to identify UX friction points
+
+**Personalization:**
+
+- Dedicated landing page per club (e.g., `/club/cleveland-heights`)
+- Custom messaging based on club size or geography
+- Dynamic inventory messaging per code allocation
+
+**Email Optimization:**
+
+- A/B test subject lines, sender names, and email copy
+- Test send times (morning vs. evening, weekday vs. weekend)
+- Segment audiences by engagement history
+
+**Automation:**
+
+- Automated wave rollout system (trigger emails based on inventory thresholds)
+- Auto-expiring codes based on time or usage
+- Abandoned cart recovery for code holders who didn't complete checkout
+
+---
+
 # 🌐 Production Infrastructure
 
 ## Frontend
