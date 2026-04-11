@@ -53,6 +53,25 @@ Edition I is part of a generational legacy initiative led by family.
 
 ---
 
+## 🔄 Recent Updates (April 2026)
+
+### Email CTA Intent Alignment
+
+**Issue**: Email CTA said "Record a message for Leroy" but landing page showed "Allocation issued," causing confusion and drop-off. Users expected to record a video but were directed to a product page first.
+
+**Resolution**: Email CTA intent alignment: changed from product-first navigation to story-first navigation using `redirect=share` while preserving club code in session storage.
+
+**Implementation**:
+- ClubAccess page now reads `redirect` query parameter
+- When `redirect=share`, automatically navigates to `/submit-video` after storing club code
+- SubmitVideo page shows acknowledgment: "You're here to send Leroy a message. Your club access is already active."
+- Added secondary CTA "Explore Your Club Allocation" to maintain path to product
+- Backward compatibility: links without `redirect` param show normal allocation page
+
+**Impact**: Seamless flow from email → video submission → optional product exploration, reducing cognitive friction and improving conversion.
+
+---
+
 # 🚀 Tech Stack
 
 ## Frontend

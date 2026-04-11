@@ -9,21 +9,42 @@ export default function ClubAccess() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Read discount code from URL parameter
+    // Read discount code and redirect param from URL
     const params = new URLSearchParams(window.location.search);
     const discountCode = params.get("code");
+    const redirectParam = params.get("redirect");
+    
     setCode(discountCode);
 
-    // Trigger fade-in animation
-    const timer = setTimeout(() => setIsVisible(true), 100);
-    return () => clearTimeout(timer);
-  }, []);
+    // Store code in sessionStorage if present
+    if (discountCode) {
+      sessionStorage.setItem("clubAccessCode", discountCode);
+      console.log("✅ Club access code stored:", discountCode);
+    }
+
+    // Handle automatic redirection based on redirect param
+    if (discountCode && redirectParam === "share") {
+      console.log("🔄 Redirect parameter detected: share");
+      console.log("📍 Navigating to /submit-video...");
+      
+      // Small delay to ensure sessionStorage is written
+      setTimeout(() => {
+        navigate("/submit-video");
+      }, 100);
+    } else {
+      // Trigger fade-in animation for normal page view
+      const timer = setTimeout(() => setIsVisible(true), 100);
+      return () => clearTimeout(timer);
+    }
+  }, [navigate]);
 
   const handleClaimAllocation = () => {
     if (!code) return;
 
     // Store discount code in sessionStorage for the Drop page to use
     sessionStorage.setItem("clubAccessCode", code);
+    console.log("✅ Club access code stored (manual claim):", code);
+    console.log("📍 Navigating to /drop...");
 
     // Navigate to Drop page using React Router
     navigate("/drop");
