@@ -13,7 +13,7 @@ export default function ClubAccess() {
     const params = new URLSearchParams(window.location.search);
     const discountCode = params.get("code");
     const redirectParam = params.get("redirect");
-    
+
     setCode(discountCode);
 
     // Store code in sessionStorage if present
@@ -26,7 +26,7 @@ export default function ClubAccess() {
     if (discountCode && redirectParam === "share") {
       console.log("🔄 Redirect parameter detected: share");
       console.log("📍 Navigating to /submit-video...");
-      
+
       // Small delay to ensure sessionStorage is written
       setTimeout(() => {
         navigate("/submit-video");

@@ -32,7 +32,8 @@ export default function SubmitVideo() {
           {/* Club Access Acknowledgment */}
           {hasClubAccess && (
             <p className="mt-6 text-sm text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-lg py-2 px-4 max-w-xl mx-auto">
-              You're here to send Leroy a message. Your club access is already active.
+              You're here to send Leroy a message. Your club access is already
+              active.
             </p>
           )}
 
@@ -59,7 +60,9 @@ export default function SubmitVideo() {
               className="inline-flex items-center justify-center px-6 py-2.5 text-sm font-medium text-zinc-700 bg-white border border-zinc-300 rounded-lg hover:bg-zinc-50 hover:border-zinc-400 transition-all duration-200 shadow-sm"
             >
               Explore Your Club Allocation
-              <span aria-hidden="true" className="ml-2">→</span>
+              <span aria-hidden="true" className="ml-2">
+                →
+              </span>
             </Link>
           </section>
         )}

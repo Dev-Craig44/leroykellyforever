@@ -62,6 +62,7 @@ Edition I is part of a generational legacy initiative led by family.
 **Resolution**: Email CTA intent alignment: changed from product-first navigation to story-first navigation using `redirect=share` while preserving club code in session storage.
 
 **Implementation**:
+
 - ClubAccess page now reads `redirect` query parameter
 - When `redirect=share`, automatically navigates to `/submit-video` after storing club code
 - SubmitVideo page shows acknowledgment: "You're here to send Leroy a message. Your club access is already active."
