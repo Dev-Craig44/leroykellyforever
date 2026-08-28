@@ -763,6 +763,35 @@ This project demonstrates several real-world engineering and product competencie
 
 ---
 
+## 🛠 Recovery & Server Maintenance (2026-08-27)
+
+Summary of backend recovery steps performed on the droplet and verification notes:
+
+- Freed disk space (truncated large system logs, removed Playwright/npm caches) to resolve `ENOSPC` failures.
+- Repaired a corrupted route file at `~/lk-api/routes/videoSubmission.js` (removed injected here-doc content) and kept a timestamped backup before changes.
+- Restarted the API under `pm2` and confirmed `lk-api` is listening on port 4000.
+- Resumed the paused MongoDB Atlas cluster and validated SRV records; logs now show `MongoDB connected successfully`.
+- Performed an end-to-end test submission; server saved a record: id `6a90ef0d74a488874bbd09e1`, filename `1787883276709-281395112.MP4`.
+
+Quick troubleshooting & verification commands (run on droplet):
+
+```bash
+# load nvm and view recent pm2 logs
+export NVM_DIR="$HOME/.nvm"; [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+pm2 logs lk-api --lines 200 --timestamp
+
+# check SRV records for Atlas
+dig +short SRV _mongodb._tcp.lk-cluster.9pdzorp.mongodb.net @8.8.8.8
+
+# list saved uploads
+ls -l ~/lk-api/uploads/videos | tail -n 20
+```
+
+Notes:
+
+- If Atlas is paused, resume the cluster in the Atlas UI before restarting the API.
+- If uploads are rejected with `Invalid file type`, prefer MP4 for initial testing — some clients report MOV as `video/quicktime` or `application/octet-stream`.
+
 # 🌐 Production Infrastructure
 
 ## Frontend
